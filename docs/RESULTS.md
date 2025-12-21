@@ -16,6 +16,7 @@
 | ID | Setting | mAP(0.5) | 备注 |
 |---:|---|---:|---|
 | E1 | Baseline (Rotated RetinaNet R50-FPN) | - | `configs/baselines/rotated_retinanet_obb_r50_fpn_1x_rsar_le90.py` |
+| E1-2k | Baseline (train split, 2k iters) | 0.0618 | `configs/baselines/rotated_retinanet_obb_r50_fpn_rsar_le90_2kiter.py` |
 | E1-debug | Baseline (train=val, 2k iters) | 0.1510 | `configs/baselines/rotated_retinanet_obb_r50_fpn_rsar_le90_val_2kiter.py` |
 | E2 | DINOv3 Frozen | - | TBD |
 | E3 | DINOv3 + LoRA | - | TBD |
