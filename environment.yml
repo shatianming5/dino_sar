@@ -1,0 +1,16 @@
+name: dino_sar
+channels:
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+      - "numpy<2"
+      - "opencv-python<4.12"
+      - openmim
+      - pillow
+      - shapely
+      - matplotlib
+      - tqdm
+      - rich
+      - python-dotenv
