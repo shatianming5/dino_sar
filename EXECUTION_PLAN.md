@@ -98,10 +98,12 @@ git push origin main
 
 **产出物（仓库内）**
 - `configs/baselines/`：baseline 配置
-- `scripts/train_baseline.sh`、`scripts/eval_baseline.sh`：一键脚本
+- `scripts/smoke_train_baseline.sh`：20 iter 冒烟训练（先验证链路）
+- `scripts/train_baseline.sh`、`scripts/eval_baseline.sh`：正式训练/评估一键脚本
 - `docs/RESULTS.md`：baseline 结果表（统一评估口径）
 
 **验收**
+- 先跑通冒烟训练：`configs/baselines/rotated_retinanet_obb_r50_fpn_rsar_le90_smoke.py`
 - loss 收敛、评估 mAP 非 0 且稳定
 - 保存最少 50 张预测可视化（本地；不要提交大图）
 
@@ -211,4 +213,3 @@ git push origin main
 - 意义：先证明“DINOv3+LoRA 在 SAR 迁移上是有效的”，再回到 RSAR 主线
 
 同样：每个兜底步骤结束也必须 `commit + push`。
-
