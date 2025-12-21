@@ -7,6 +7,7 @@ _base_ = [
 custom_imports = dict(
     imports=[
         'dino_sar.datasets.rsar_dota',
+        'dino_sar.patches.mmrotate_nms_device',
     ],
     allow_failed_imports=False,
 )
@@ -75,7 +76,6 @@ model = dict(
     test_cfg=dict(
         nms_pre=2000,
         min_bbox_size=0,
-        score_thr=0.05,
+        score_thr=0.001,
         nms=dict(iou_thr=0.1),
         max_per_img=2000))
-

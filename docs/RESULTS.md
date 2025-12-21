@@ -16,6 +16,8 @@
 | ID | Setting | mAP(0.5) | 备注 |
 |---:|---|---:|---|
 | E1 | Baseline (Rotated RetinaNet R50-FPN) | - | `configs/baselines/rotated_retinanet_obb_r50_fpn_1x_rsar_le90.py` |
+| E1-debug | Baseline (train=val, 2k iters) | 0.1510 | `configs/baselines/rotated_retinanet_obb_r50_fpn_rsar_le90_val_2kiter.py` |
 | E2 | DINOv3 Frozen | - | TBD |
 | E3 | DINOv3 + LoRA | - | TBD |
 
+> 备注：mmrotate `0.3.4` 在 CUDA 推理阶段 `multiclass_nms_rotated` 存在 device mismatch 问题，本仓库用 `dino_sar/patches/mmrotate_nms_device.py` 做了运行时修复。
