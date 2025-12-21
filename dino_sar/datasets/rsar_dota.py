@@ -1,8 +1,11 @@
 from __future__ import annotations
 
 import glob
+import hashlib
 import os
 import os.path as osp
+import pickle
+from typing import Any
 
 import numpy as np
 
@@ -24,12 +27,59 @@ class RSARDOTADataset(DOTADataset):
     CLASSES = ("ship",)
     PALETTE = [(255, 64, 64)]
 
-    def load_annotations(self, ann_folder: str):
-        ann_files = glob.glob(osp.join(ann_folder, "*.txt"))
+    def __init__(
+        self,
+        *args: Any,
+        cache_dir: str | None = None,
+        cache_refresh: bool = False,
+        **kwargs: Any,
+    ):
+        self.cache_dir = cache_dir
+        self.cache_refresh = cache_refresh
+        super().__init__(*args, **kwargs)
 
+    def load_annotations(self, ann_folder: str):
         img_prefix = self.img_prefix
         if isinstance(img_prefix, dict):
             img_prefix = img_prefix.get("img", "")
+
+        cache_path = None
+        if self.cache_dir:
+            os.makedirs(self.cache_dir, exist_ok=True)
+            cache_key = "|".join(
+                [
+                    osp.abspath(ann_folder),
+                    osp.abspath(img_prefix),
+                    str(getattr(self, "version", "")),
+                    str(getattr(self, "difficulty", "")),
+                    str(getattr(self, "filter_empty_gt", "")),
+                    ",".join(self.CLASSES),
+                ]
+            )
+            cache_hash = hashlib.md5(cache_key.encode("utf-8")).hexdigest()[:16]
+            cache_path = osp.join(self.cache_dir, f"rsar_dota_{cache_hash}.pkl")
+
+        if cache_path and osp.exists(cache_path) and not self.cache_refresh:
+            try:
+                with open(cache_path, "rb") as f:
+                    payload = pickle.load(f)
+                data_infos = payload["data_infos"] if isinstance(payload, dict) else payload
+                self.img_ids = (
+                    payload.get("img_ids")  # type: ignore[union-attr]
+                    if isinstance(payload, dict) and payload.get("img_ids") is not None
+                    else [osp.splitext(info["filename"])[0] for info in data_infos]
+                )
+                try:
+                    from mmcv.utils import print_log
+
+                    print_log(f"[RSARDOTADataset] Loaded cache: {cache_path}", logger="root")
+                except Exception:
+                    pass
+                return data_infos
+            except Exception:
+                pass
+
+        ann_files = sorted(glob.glob(osp.join(ann_folder, "*.txt")))
 
         img_files = []
         for ext in (".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff"):
@@ -92,6 +142,22 @@ class RSARDOTADataset(DOTADataset):
 
             data_infos.append(data_info)
 
-        self.img_ids = [info["filename"][:-4] for info in data_infos]
-        return data_infos
+        self.img_ids = [osp.splitext(info["filename"])[0] for info in data_infos]
 
+        if cache_path:
+            try:
+                payload = {"data_infos": data_infos, "img_ids": self.img_ids}
+                tmp_path = f"{cache_path}.{os.getpid()}.tmp"
+                with open(tmp_path, "wb") as f:
+                    pickle.dump(payload, f, protocol=pickle.HIGHEST_PROTOCOL)
+                os.replace(tmp_path, cache_path)
+                try:
+                    from mmcv.utils import print_log
+
+                    print_log(f"[RSARDOTADataset] Saved cache: {cache_path}", logger="root")
+                except Exception:
+                    pass
+            except Exception:
+                pass
+
+        return data_infos
