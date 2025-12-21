@@ -61,3 +61,22 @@ DINOv3_WEIGHTS="/abs/path/to/dinov3/weights"
 ```bash
 python train_detection.py --help
 ```
+
+---
+
+## 3) Step5：DINOv3（集成到 MMRotate）
+
+> 说明：主线环境固定在 `torch==2.0.1` + `mmrotate==0.3.4`（旧栈），而 DINOv3 官方 `hubconf.py` 会触发与更新版 torch 相关的 import。  
+> 因此本仓库的 `Dinov3ConvNeXt` 采用“从本地 dinov3 仓库直接加载 `dinov3/models/convnext.py`”的方式绕开 `hubconf.py`。
+
+### 3.1 准备 dinov3 仓库（不提交到 Git）
+
+```bash
+git clone https://github.com/facebookresearch/dinov3 third_party/dinov3
+export DINOV3_REPO_DIR="$(pwd)/third_party/dinov3"
+```
+
+### 3.2 说明
+
+- 训练/评估时需要设置 `DINOV3_REPO_DIR`（或 `DINOV3_REPO`），否则会报错提示缺少 dinov3 repo path
+- 当配置里 `model.backbone.pretrained=True` 时，会自动从官方 URL 下载权重到 torch hub cache（只下载一次）
