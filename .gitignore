@@ -1,0 +1,44 @@
+# === Data (do not commit to GitHub) ===
+/train/
+/val/
+/test/
+
+# === Experiment outputs / artifacts ===
+/outputs/
+/runs/
+/debug_vis/
+/vis_samples/
+/checkpoints/
+/weights/
+/logs/
+/wandb/
+/mlruns/
+/lightning_logs/
+
+*.pth
+*.pt
+*.ckpt
+*.onnx
+*.engine
+
+# === Environments / secrets ===
+.env
+.env.*
+.venv/
+venv/
+ENV/
+env/
+
+# === Python caches ===
+__pycache__/
+*.py[cod]
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# === OS / editors ===
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
