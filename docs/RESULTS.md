@@ -20,6 +20,7 @@
 | E1-debug | Baseline (train=val, 2k iters) | 0.1510 | `configs/baselines/rotated_retinanet_obb_r50_fpn_rsar_le90_val_2kiter.py` |
 | E2 | DINOv3 Frozen | - | TBD |
 | E2-2k | DINOv3 Frozen (ConvNeXt-S, 2k iters) | 0.0400 | `configs/dinov3_frozen/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_frozen_2kiter.py` |
+| E2-2k-cnbase | DINOv3 Frozen (ConvNeXt-Base, 2k iters) | 0.0562 | `configs/dinov3_frozen/retinanet_dinov3_timm_convnext_base_fpn_rsar_le90_frozen_2kiter.py` |
 | E2-2k-full | DINOv3 Full fine-tune (ConvNeXt-S, 2k iters, lr=2.5e-3) | 0.0001 | `configs/dinov3_full/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_full_2kiter.py` |
 | E2-2k-full-lr0p00025 | DINOv3 Full fine-tune (ConvNeXt-S, 2k iters, lr=2.5e-4) | 0.2681 | `configs/dinov3_full/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_full_2kiter_lr0p00025.py` |
 | E3 | DINOv3 + LoRA | - | TBD |
