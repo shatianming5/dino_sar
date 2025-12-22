@@ -16,6 +16,27 @@
 - `docs/RESULTS.md`：结果表（统一口径）
 - `docs/ROBUSTNESS.md`：鲁棒性曲线（干扰注入）
 
+## 结果速览（RSAR val，mAP@0.5）
+
+> 完整结果与更多消融见 `docs/RESULTS.md`；默认都是 2k iters（除非特别说明）。
+
+| Setting | mAP(0.5) | Config |
+|---|---:|---|
+| Baseline (Rotated RetinaNet R50-FPN, 2k) | 0.0618 | `configs/baselines/rotated_retinanet_obb_r50_fpn_rsar_le90_2kiter.py` |
+| DINOv3 Frozen (ConvNeXt-S, 2k) | 0.0400 | `configs/dinov3_frozen/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_frozen_2kiter.py` |
+| DINOv3 Frozen (ConvNeXt-Base, 2k) | 0.0562 | `configs/dinov3_frozen/retinanet_dinov3_timm_convnext_base_fpn_rsar_le90_frozen_2kiter.py` |
+| DINOv3 Full FT (ConvNeXt-S, lr=2.5e-4, 2k) | 0.2681 | `configs/dinov3_full/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_full_2kiter_lr0p00025.py` |
+| DINOv3 Full FT (ConvNeXt-Base, lr=2.5e-4, 2k) | 0.2570 | `configs/dinov3_full/retinanet_dinov3_timm_convnext_base_fpn_rsar_le90_full_2kiter_lr0p00025.py` |
+| **DINOv3 + LoRA（最佳单次）** (ConvNeXt-S, r=16, 2k) | **0.3293** | `configs/dinov3_lora/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r16_2kiter.py` |
+
+**LoRA 关键消融（ConvNeXt-S, 2k）**
+- Rank：r=8→0.2375，r=16→0.3293，r=32→0.3153
+- Target：`stages_2+3`→0.3231（接近全量），`mlp.fc2` only→0.2320，`stages_3` only→0.1035
+- 5k iters：按比例延后 LR step→0.1771；保持早衰减→0.2904（仍不如 2k 最优）
+
+**多 seed 稳定性（LoRA r=16, 2k）**
+- seed=0/1/2：0.2004 / 0.1866 / 0.2739；mean=0.2203，std=0.0469（见 `docs/RESULTS.md`）
+
 ## 数据说明（不进 Git）
 
 本仓库不提交数据集文件（`train/`、`val/`、`test/` 已在 `.gitignore` 中忽略）。在本机准备好数据后再进行训练/评估。
