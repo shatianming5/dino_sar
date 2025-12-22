@@ -14,3 +14,4 @@ dependencies:
       - tqdm
       - rich
       - python-dotenv
+      - "timm>=1.0.17"

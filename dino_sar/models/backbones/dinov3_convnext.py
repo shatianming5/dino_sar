@@ -97,8 +97,17 @@ class Dinov3ConvNeXt(nn.Module):
             else:
                 url = self.weights
 
-            state_dict = torch.hub.load_state_dict_from_url(url, map_location="cpu")
-            model.load_state_dict(state_dict, strict=True)
+            try:
+                if osp.exists(url):
+                    state_dict = torch.load(url, map_location="cpu")
+                else:
+                    state_dict = torch.hub.load_state_dict_from_url(url, map_location="cpu")
+                model.load_state_dict(state_dict, strict=True)
+            except Exception as e:
+                raise RuntimeError(
+                    f"Failed to load DINOv3 ConvNeXt weights from {url}. "
+                    "If the official URL is blocked (e.g. 403), download the .pth locally and set `weights` to that path."
+                ) from e
         else:
             model.init_weights()
 
