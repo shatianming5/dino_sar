@@ -237,6 +237,24 @@ git push origin main
 **结束必须 push**
 - Commit message 建议：`stage11: lora r16 5k early lr decay`
 
+---
+
+### Step 12（扩展实验）：LoRA rank=32 消融（2k iters）
+
+**目标**
+- 补全 LoRA rank ablation（r=8/16/32），观察是否继续提升
+
+**产出物（仓库内）**
+- `configs/dinov3_lora/*_r32_2kiter.py`
+- `scripts/reproduce_lora_r32_2k.sh`
+- `docs/RESULTS.md`：追加 `E3-2k-r32` 的 mAP
+
+**验收**
+- 训练完成保存 `iter_2000.pth`；在 RSAR val 上评估得到 mAP
+
+**结束必须 push**
+- Commit message 建议：`stage12: lora rank=32 ablation`
+
 ## 2. 兜底路线（当 Step 3/4 在 RSAR/DOTA 卡住时启用）
 
 **启用条件（建议）**
