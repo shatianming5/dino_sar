@@ -116,3 +116,9 @@ conda run -n dino_sar python tools/jamming/run_curve.py \
   --out outputs/robustness/lora_r8_gauss
 ```
 
+---
+
+## 6) 推荐配置（当前最优）
+
+- LoRA rank=16：`configs/dinov3_lora/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r16_2kiter.py`
+- 一键脚本：`scripts/reproduce_lora_r16_2k.sh`

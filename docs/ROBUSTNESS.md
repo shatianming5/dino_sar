@@ -57,3 +57,4 @@ conda run -n dino_sar python tools/jamming/run_curve.py \\
 |---|---:|---:|---:|---:|
 | Baseline (R50-FPN, iter_2000) | 0.1080 | 0.1099 | 0.1182 | 0.1155 |
 | LoRA (DINOv3 ConvNeXt-S, r=8, iter_2000) | 0.2445 | 0.2434 | 0.2423 | 0.2350 |
+| LoRA (DINOv3 ConvNeXt-S, r=16, iter_2000) | 0.3644 | 0.3632 | 0.3590 | 0.3589 |
