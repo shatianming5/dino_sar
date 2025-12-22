@@ -219,6 +219,24 @@ git push origin main
 **结束必须 push**
 - Commit message 建议：`stage10: lora r16 longer schedule (5k)`
 
+---
+
+### Step 11（扩展实验）：5k iters，但保持 2k 的早学习率衰减
+
+**动机**
+- Step10 将学习率衰减按迭代数比例后移（`step=[4000,4750]`）导致性能明显下降；这里验证“延长训练但不延后衰减”（即更长的低 LR 尾训练）是否更稳。
+
+**产出物（仓库内）**
+- `configs/dinov3_lora/*_r16_5kiter_early_decay.py`：早衰减的 5k 配置
+- `scripts/reproduce_lora_r16_5k_early_decay.sh`：一键脚本
+- `docs/RESULTS.md`：追加对应 mAP
+
+**验收**
+- 保存 `iter_5000.pth` 并完成 RSAR val mAP 评估
+
+**结束必须 push**
+- Commit message 建议：`stage11: lora r16 5k early lr decay`
+
 ## 2. 兜底路线（当 Step 3/4 在 RSAR/DOTA 卡住时启用）
 
 **启用条件（建议）**
