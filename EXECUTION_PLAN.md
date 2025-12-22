@@ -345,6 +345,60 @@ git push origin main
 **结束必须 push**
 - Commit message 建议：`stage17: convnext-base full fine-tune low lr`
 
+---
+
+### Step 18（消融实验）：LoRA target = fc2 only（ConvNeXt-S, r=16, 2k）
+
+**目标**
+- 测试 LoRA 只插在 `mlp.fc2` 是否足够（更少可训练参数）
+
+**产出物（仓库内）**
+- `configs/lora_target_ablation/*_fc2only_2kiter.py`
+- `scripts/reproduce_lora_r16_fc2only_2k.sh`
+- `docs/RESULTS.md`：追加对应 mAP
+
+**验收**
+- 训练完成保存 `iter_2000.pth`；在 RSAR val 上评估得到 mAP
+
+**结束必须 push**
+- Commit message 建议：`stage18: lora target fc2 only`
+
+---
+
+### Step 19（消融实验）：LoRA target = stages_3 only（ConvNeXt-S, r=16, 2k）
+
+**目标**
+- 测试 LoRA 只插在最后一个 stage（`stages_3`）是否足够（极低参数量）
+
+**产出物（仓库内）**
+- `configs/lora_target_ablation/*_stage3_2kiter.py`
+- `scripts/reproduce_lora_r16_stage3_2k.sh`
+- `docs/RESULTS.md`：追加对应 mAP
+
+**验收**
+- 训练完成保存 `iter_2000.pth`；在 RSAR val 上评估得到 mAP
+
+**结束必须 push**
+- Commit message 建议：`stage19: lora target stage3 only`
+
+---
+
+### Step 20（消融实验）：LoRA target = stages_2+3（ConvNeXt-S, r=16, 2k）
+
+**目标**
+- 测试 LoRA 只插在高层（`stages_2, stages_3`）是否接近全量 LoRA
+
+**产出物（仓库内）**
+- `configs/lora_target_ablation/*_stage23_2kiter.py`
+- `scripts/reproduce_lora_r16_stage23_2k.sh`
+- `docs/RESULTS.md`：追加对应 mAP
+
+**验收**
+- 训练完成保存 `iter_2000.pth`；在 RSAR val 上评估得到 mAP
+
+**结束必须 push**
+- Commit message 建议：`stage20: lora target stage23`
+
 ## 2. 兜底路线（当 Step 3/4 在 RSAR/DOTA 卡住时启用）
 
 **启用条件（建议）**
