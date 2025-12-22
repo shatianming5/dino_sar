@@ -26,6 +26,7 @@
 | E3 | DINOv3 + LoRA | - | TBD |
 | E3-2k | DINOv3 + LoRA (ConvNeXt-S, r=8, 2k iters) | 0.2375 | `configs/dinov3_lora/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r8_2kiter.py` |
 | E3-2k-r16 | DINOv3 + LoRA (ConvNeXt-S, r=16, 2k iters) | 0.3293 | `configs/dinov3_lora/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r16_2kiter.py` |
+| E3-2k-cnbase-r16 | DINOv3 + LoRA (ConvNeXt-Base, r=16, 2k iters) | 0.1359 | `configs/dinov3_lora/retinanet_dinov3_timm_convnext_base_fpn_rsar_le90_lora_r16_2kiter.py` |
 | E3-2k-r32 | DINOv3 + LoRA (ConvNeXt-S, r=32, 2k iters) | 0.3153 | `configs/dinov3_lora/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r32_2kiter.py` |
 | E3-5k-r16 | DINOv3 + LoRA (ConvNeXt-S, r=16, 5k iters, scaled LR steps) | 0.1771 | `configs/dinov3_lora/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r16_5kiter.py` |
 | E3-5k-r16-early | DINOv3 + LoRA (ConvNeXt-S, r=16, 5k iters, early LR decay) | 0.2904 | `configs/dinov3_lora/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r16_5kiter_early_decay.py` |
