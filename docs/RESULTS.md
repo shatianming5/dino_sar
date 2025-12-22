@@ -18,7 +18,7 @@
 |---:|---|---:|---|
 | E1 | Baseline (Rotated RetinaNet R50-FPN) | - | `configs/baselines/rotated_retinanet_obb_r50_fpn_1x_rsar_le90.py` |
 | E1-2k | Baseline (train split, 2k iters) | 0.0618 | `configs/baselines/rotated_retinanet_obb_r50_fpn_rsar_le90_2kiter.py` |
-| E1-10k | Baseline (train split, 10k iters) | - | `configs/baselines/rotated_retinanet_obb_r50_fpn_rsar_le90_10kiter.py` |
+| E1-10k | Baseline (train split, 10k iters) | 0.4625 | `configs/baselines/rotated_retinanet_obb_r50_fpn_rsar_le90_10kiter.py` |
 | E1-debug | Baseline (train=val, 2k iters) | 0.1510 | `configs/baselines/rotated_retinanet_obb_r50_fpn_rsar_le90_val_2kiter.py` |
 | E2 | DINOv3 Frozen | - | TBD |
 | E2-2k | DINOv3 Frozen (ConvNeXt-S, 2k iters) | 0.0400 | `configs/dinov3_frozen/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_frozen_2kiter.py` |

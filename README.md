@@ -23,7 +23,8 @@
 
 | Setting | mAP(0.5) | Config |
 |---|---:|---|
-| Baseline (Rotated RetinaNet R50-FPN, 2k) | 0.0618 | `configs/baselines/rotated_retinanet_obb_r50_fpn_rsar_le90_2kiter.py` |
+| Baseline (Rotated RetinaNet R50-FPN, 10k) | 0.4625 | `configs/baselines/rotated_retinanet_obb_r50_fpn_rsar_le90_10kiter.py` |
+| Baseline (Rotated RetinaNet R50-FPN, 2k, quick) | 0.0618 | `configs/baselines/rotated_retinanet_obb_r50_fpn_rsar_le90_2kiter.py` |
 | DINOv3 Frozen (ConvNeXt-S, 2k) | 0.0400 | `configs/dinov3_frozen/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_frozen_2kiter.py` |
 | DINOv3 Frozen (ConvNeXt-Base, 2k) | 0.0562 | `configs/dinov3_frozen/retinanet_dinov3_timm_convnext_base_fpn_rsar_le90_frozen_2kiter.py` |
 | DINOv3 Full FT (ConvNeXt-S, lr=2.5e-4, 2k) | 0.2681 | `configs/dinov3_full/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_full_2kiter_lr0p00025.py` |
