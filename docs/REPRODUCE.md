@@ -127,3 +127,19 @@ conda run -n dino_sar python tools/jamming/run_curve.py \
 
 - LoRA rank=16, 5k iters：`configs/dinov3_lora/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r16_5kiter.py`
 - 一键脚本：`scripts/reproduce_lora_r16_5k.sh`
+
+## 8) ConvNeXt-Base（可选）
+
+- Frozen 2k：`scripts/reproduce_dinov3_frozen_convnext_base_2k.sh`
+- LoRA r16 2k：`scripts/reproduce_lora_r16_convnext_base_2k.sh`
+- Full fine-tune (lr=2.5e-4) 2k：`scripts/reproduce_dinov3_full_convnext_base_2k_lr0p00025.sh`
+
+## 9) LoRA target 消融（可选）
+
+- fc2 only：`scripts/reproduce_lora_r16_fc2only_2k.sh`
+- stages_3 only：`scripts/reproduce_lora_r16_stage3_2k.sh`
+- stages_2+3：`scripts/reproduce_lora_r16_stage23_2k.sh`
+
+## 10) 多 seed 稳定性（可选）
+
+- LoRA r16 2k（seed=0/1/2）：`scripts/run_multiseed_lora_r16_2k.sh`
