@@ -37,4 +37,10 @@
 | E4-2k | LoRA + SARAug (speckle+gamma, 2k iters) | 0.1845 | `configs/aug_ablation/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r8_saraug_speckle_gamma_2kiter.py` |
 | E5-2k | LoRA + SARAug (log, 2k iters) | 0.1521 | `configs/aug_ablation/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r8_saraug_log_2kiter.py` |
 
+## 多 seed 稳定性
+
+| Setting | seed0 | seed1 | seed2 | mean | std (sample) |
+|---|---:|---:|---:|---:|---:|
+| LoRA r=16 (2k iters) `configs/dinov3_lora/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r16_2kiter.py` | 0.2004 | 0.1866 | 0.2739 | 0.2203 | 0.0469 |
+
 > 备注：mmrotate `0.3.4` 在 CUDA 推理阶段 `multiclass_nms_rotated` 存在 device mismatch 问题，本仓库用 `dino_sar/patches/mmrotate_nms_device.py` 做了运行时修复。
