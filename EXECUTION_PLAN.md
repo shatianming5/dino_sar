@@ -399,6 +399,23 @@ git push origin main
 **结束必须 push**
 - Commit message 建议：`stage20: lora target stage23`
 
+---
+
+### Step 21（稳定性）：LoRA r=16 多 seed 复现（3 seeds）
+
+**目标**
+- 对当前最优配置（LoRA r=16, 2k iters）做多随机种子复现，报告均值±方差
+
+**产出物（仓库内）**
+- `scripts/run_multiseed_lora_r16_2k.sh`：自动跑 seed=0/1/2（训练+评估）
+- `docs/RESULTS.md`：追加多 seed 表格（含 mean/std）
+
+**验收**
+- 至少 3 个 seed 全部完成训练与 val mAP；生成汇总表
+
+**结束必须 push**
+- Commit message 建议：`stage21: multi-seed stability (lora r16)`
+
 ## 2. 兜底路线（当 Step 3/4 在 RSAR/DOTA 卡住时启用）
 
 **启用条件（建议）**
