@@ -22,6 +22,7 @@
 | E2-2k | DINOv3 Frozen (ConvNeXt-S, 2k iters) | 0.0400 | `configs/dinov3_frozen/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_frozen_2kiter.py` |
 | E3 | DINOv3 + LoRA | - | TBD |
 | E3-2k | DINOv3 + LoRA (ConvNeXt-S, r=8, 2k iters) | 0.2375 | `configs/dinov3_lora/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r8_2kiter.py` |
+| E3-2k-r16 | DINOv3 + LoRA (ConvNeXt-S, r=16, 2k iters) | 0.3293 | `configs/dinov3_lora/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r16_2kiter.py` |
 | E4-2k | LoRA + SARAug (speckle+gamma, 2k iters) | 0.1845 | `configs/aug_ablation/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r8_saraug_speckle_gamma_2kiter.py` |
 | E5-2k | LoRA + SARAug (log, 2k iters) | 0.1521 | `configs/aug_ablation/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r8_saraug_log_2kiter.py` |
 
