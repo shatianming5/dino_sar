@@ -28,15 +28,17 @@
 | DINOv3 Frozen (ConvNeXt-Base, 2k) | 0.0562 | `configs/dinov3_frozen/retinanet_dinov3_timm_convnext_base_fpn_rsar_le90_frozen_2kiter.py` |
 | DINOv3 Full FT (ConvNeXt-S, lr=2.5e-4, 2k) | 0.2681 | `configs/dinov3_full/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_full_2kiter_lr0p00025.py` |
 | DINOv3 Full FT (ConvNeXt-Base, lr=2.5e-4, 2k) | 0.2570 | `configs/dinov3_full/retinanet_dinov3_timm_convnext_base_fpn_rsar_le90_full_2kiter_lr0p00025.py` |
-| **DINOv3 + LoRA（最佳单次）** (ConvNeXt-S, r=16, 2k) | **0.3293** | `configs/dinov3_lora/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r16_2kiter.py` |
+| **DINOv3 + LoRA（多 seed mean±std）** (ConvNeXt-S, r=16, 10k) | **0.5169±0.0111** | `configs/dinov3_lora/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r16_10kiter.py` |
+| DINOv3 + LoRA（单次 best） (ConvNeXt-S, r=16, 2k) | 0.3293 | `configs/dinov3_lora/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r16_2kiter.py` |
 
 **LoRA 关键消融（ConvNeXt-S, 2k）**
 - Rank：r=8→0.2375，r=16→0.3293，r=32→0.3153
 - Target：`stages_2+3`→0.3231（接近全量），`mlp.fc2` only→0.2320，`stages_3` only→0.1035
-- 5k iters：按比例延后 LR step→0.1771；保持早衰减→0.2904（仍不如 2k 最优）
+- 5k iters：按比例延后 LR step→0.1771；保持早衰减→0.2904（仍不如 2k 单次 best）
 
-**多 seed 稳定性（LoRA r=16, 2k）**
-- seed=0/1/2：0.2004 / 0.1866 / 0.2739；mean=0.2203，std=0.0469（见 `docs/RESULTS.md`）
+**多 seed 稳定性（LoRA r=16）**
+- 2k（seed=0/1/2）：0.2004 / 0.1866 / 0.2739；mean=0.2203，std=0.0469
+- 10k（seed=0/1/2）：0.5150 / 0.5069 / 0.5287；mean=0.5169，std=0.0111（见 `docs/RESULTS.md`）
 
 ## 数据说明（不进 Git）
 
