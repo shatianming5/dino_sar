@@ -72,6 +72,14 @@ bash scripts/eval_baseline.sh \
 
 ---
 
+## 3b) Baseline（R50-FPN, 10k iters，可选但更合理）
+
+```bash
+bash scripts/reproduce_baseline_r50_10k.sh 1 0
+```
+
+---
+
 ## 4) DINOv3 + LoRA（ConvNeXt-S, r=8, 2k iters）
 
 说明：

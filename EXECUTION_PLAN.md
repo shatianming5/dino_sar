@@ -438,6 +438,24 @@ git push origin main
 **结束必须 push**
 - Commit message 建议：`stage22: multi-seed stability (lora r16 10k)`
 
+---
+
+### Step 23（补强 Baseline）：Rotated RetinaNet R50-FPN 更长 schedule（10k）
+
+**目标**
+- 解决 Step4 里 baseline 仅 2k iters 覆盖数据过少的问题，提供更合理的 baseline 对照
+
+**产出物（仓库内）**
+- `configs/baselines/rotated_retinanet_obb_r50_fpn_rsar_le90_10kiter.py`
+- `scripts/reproduce_baseline_r50_10k.sh`
+- `docs/RESULTS.md`：补充 `E1-10k` 的 mAP
+
+**验收**
+- 保存 `iter_10000.pth` 并完成 RSAR test mAP 评估
+
+**结束必须 push**
+- Commit message 建议：`stage23: stronger baseline r50 10k`
+
 ## 2. 兜底路线（当 Step 3/4 在 RSAR/DOTA 卡住时启用）
 
 **启用条件（建议）**
