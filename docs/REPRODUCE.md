@@ -143,3 +143,7 @@ conda run -n dino_sar python tools/jamming/run_curve.py \
 ## 10) 多 seed 稳定性（可选）
 
 - LoRA r16 2k（seed=0/1/2）：`scripts/run_multiseed_lora_r16_2k.sh`
+
+## 11) 更长训练 + 多 seed（可选）
+
+- LoRA r16 10k（seed=0/1/2）：`scripts/run_multiseed_lora_r16_10k.sh`

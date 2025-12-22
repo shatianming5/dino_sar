@@ -416,6 +416,26 @@ git push origin main
 **结束必须 push**
 - Commit message 建议：`stage21: multi-seed stability (lora r16)`
 
+---
+
+### Step 22（稳定性）：LoRA r=16 更长 schedule（10k）+ 多 seed
+
+**目标**
+- 用更长训练（10k iters）降低短跑方差，并对 seed=0/1/2 做稳定性评估（mean/std）
+
+**产出物（仓库内）**
+- `configs/dinov3_lora/*_r16_10kiter.py`
+- `scripts/reproduce_lora_r16_10k.sh`
+- `scripts/run_multiseed_lora_r16_10k.sh`
+- `docs/RESULTS.md`：追加多 seed 结果（含 mean/std）
+- `README.md`：更新结果速览（若均值显著变化）
+
+**验收**
+- seed=0/1/2 均完成训练与 val mAP；生成 mean/std
+
+**结束必须 push**
+- Commit message 建议：`stage22: multi-seed stability (lora r16 10k)`
+
 ## 2. 兜底路线（当 Step 3/4 在 RSAR/DOTA 卡住时启用）
 
 **启用条件（建议）**
