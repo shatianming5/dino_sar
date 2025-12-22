@@ -42,6 +42,6 @@
 | Setting | seed0 | seed1 | seed2 | mean | std (sample) |
 |---|---:|---:|---:|---:|---:|
 | LoRA r=16 (2k iters) `configs/dinov3_lora/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r16_2kiter.py` | 0.2004 | 0.1866 | 0.2739 | 0.2203 | 0.0469 |
-| LoRA r=16 (10k iters, step=1600/9000) `configs/dinov3_lora/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r16_10kiter.py` | 0.5150 | - | - | - | - |
+| LoRA r=16 (10k iters, step=1600/9000) `configs/dinov3_lora/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r16_10kiter.py` | 0.5150 | 0.5069 | - | - | - |
 
 > 备注：mmrotate `0.3.4` 在 CUDA 推理阶段 `multiclass_nms_rotated` 存在 device mismatch 问题，本仓库用 `dino_sar/patches/mmrotate_nms_device.py` 做了运行时修复。
