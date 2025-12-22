@@ -456,6 +456,24 @@ git push origin main
 **结束必须 push**
 - Commit message 建议：`stage23: stronger baseline r50 10k`
 
+---
+
+### Step 24（稳定性）：Baseline R50-FPN（10k）多 seed（3 seeds）
+
+**目标**
+- 对 baseline（R50-FPN, 10k iters）做 seed=0/1/2 复现，和 LoRA 的稳定性对齐（报告均值±方差）
+
+**产出物（仓库内）**
+- `scripts/run_multiseed_baseline_r50_10k.sh`：自动跑 seed=0/1/2（训练+评估）
+- `docs/RESULTS.md`：补充 baseline 多 seed 表格（含 mean/std）
+- `README.md`：更新结果速览（若需要展示 mean±std）
+
+**验收**
+- seed=0/1/2 均完成训练与 test mAP；生成 mean/std
+
+**结束必须 push**
+- Commit message 建议：`stage24: baseline multi-seed stability (r50 10k)`
+
 ## 2. 兜底路线（当 Step 3/4 在 RSAR/DOTA 卡住时启用）
 
 **启用条件（建议）**

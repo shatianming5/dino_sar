@@ -80,6 +80,14 @@ bash scripts/reproduce_baseline_r50_10k.sh 1 0
 
 ---
 
+## 3c) Baseline 多 seed（R50-FPN, 10k iters，可选）
+
+```bash
+bash scripts/run_multiseed_baseline_r50_10k.sh 1
+```
+
+---
+
 ## 4) DINOv3 + LoRA（ConvNeXt-S, r=8, 2k iters）
 
 说明：
