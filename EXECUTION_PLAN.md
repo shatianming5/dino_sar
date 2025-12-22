@@ -255,6 +255,24 @@ git push origin main
 **结束必须 push**
 - Commit message 建议：`stage12: lora rank=32 ablation`
 
+---
+
+### Step 13（对照实验）：DINOv3 全量微调（非 LoRA, 2k iters）
+
+**目标**
+- 补齐 ablation：Frozen vs LoRA vs Full fine-tune（验证 LoRA 是否在更少可训练参数下达到接近/更好的 mAP）
+
+**产出物（仓库内）**
+- `configs/dinov3_full/*_full_2kiter.py`
+- `scripts/reproduce_dinov3_full_2k.sh`
+- `docs/RESULTS.md`：追加对应 mAP
+
+**验收**
+- 训练完成保存 `iter_2000.pth`；在 RSAR val 上评估得到 mAP
+
+**结束必须 push**
+- Commit message 建议：`stage13: dinov3 full fine-tune baseline`
+
 ## 2. 兜底路线（当 Step 3/4 在 RSAR/DOTA 卡住时启用）
 
 **启用条件（建议）**
