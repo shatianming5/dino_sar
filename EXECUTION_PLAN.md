@@ -291,6 +291,60 @@ git push origin main
 **结束必须 push**
 - Commit message 建议：`stage14: full fine-tune with lower lr`
 
+---
+
+### Step 15（扩展实验）：ConvNeXt-Base（Frozen, 2k）
+
+**目标**
+- 验证更强 backbone（ConvNeXt-Base DINOv3）在 Frozen 情况下的上限
+
+**产出物（仓库内）**
+- `configs/dinov3_frozen/*convnext_base*_2kiter.py`
+- `scripts/reproduce_dinov3_frozen_convnext_base_2k.sh`
+- `docs/RESULTS.md`：追加对应 mAP
+
+**验收**
+- 训练完成保存 `iter_2000.pth`；在 RSAR val 上评估得到 mAP
+
+**结束必须 push**
+- Commit message 建议：`stage15: convnext-base frozen`
+
+---
+
+### Step 16（扩展实验）：ConvNeXt-Base（LoRA r=16, 2k）
+
+**目标**
+- 在 ConvNeXt-Base 上跑 LoRA（r=16），对比 ConvNeXt-S 的 LoRA 结果
+
+**产出物（仓库内）**
+- `configs/dinov3_lora/*convnext_base*_r16_2kiter.py`
+- `scripts/reproduce_lora_r16_convnext_base_2k.sh`
+- `docs/RESULTS.md`：追加对应 mAP
+
+**验收**
+- 训练完成保存 `iter_2000.pth`；在 RSAR val 上评估得到 mAP
+
+**结束必须 push**
+- Commit message 建议：`stage16: convnext-base lora r16`
+
+---
+
+### Step 17（对照实验）：ConvNeXt-Base（Full fine-tune, low LR, 2k）
+
+**目标**
+- 在 ConvNeXt-Base 上做低学习率全量微调，对比 LoRA 的参数效率与性能
+
+**产出物（仓库内）**
+- `configs/dinov3_full/*convnext_base*_lr0p00025.py`
+- `scripts/reproduce_dinov3_full_convnext_base_2k_lr0p00025.sh`
+- `docs/RESULTS.md`：追加对应 mAP
+
+**验收**
+- 训练完成保存 `iter_2000.pth`；在 RSAR val 上评估得到 mAP
+
+**结束必须 push**
+- Commit message 建议：`stage17: convnext-base full fine-tune low lr`
+
 ## 2. 兜底路线（当 Step 3/4 在 RSAR/DOTA 卡住时启用）
 
 **启用条件（建议）**
