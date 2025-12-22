@@ -8,6 +8,7 @@
 ## 指标口径
 
 - RSAR（DOTA-OBB）使用 **mAP@IoU=0.5**
+- 默认使用 `mim test` 的 `cfg.data.test` 作为评估 split（本仓库 RSAR 配置默认指向 `test/`）
 
 ---
 

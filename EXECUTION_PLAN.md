@@ -11,6 +11,8 @@ git commit -m "stageX: <本阶段一句话总结>"
 git push origin main
 ```
 
+**评估 split（统一口径）：** `scripts/eval_baseline.sh` 调用 `mim test`，默认评估 config 的 `data.test`（本仓库 RSAR 配置默认指向 `test/`）。
+
 ---
 
 ## 0. 对 `plan.md` 的完整结构解析（你要做的事都在这里）
@@ -214,7 +216,7 @@ git push origin main
 - `docs/RESULTS.md`：追加 `E3-5k-r16` 的 mAP
 
 **验收**
-- 训练完成保存 `iter_5000.pth`；在 RSAR val 上评估得到 mAP
+- 训练完成保存 `iter_5000.pth`；在 RSAR test 上评估得到 mAP
 
 **结束必须 push**
 - Commit message 建议：`stage10: lora r16 longer schedule (5k)`
@@ -232,7 +234,7 @@ git push origin main
 - `docs/RESULTS.md`：追加对应 mAP
 
 **验收**
-- 保存 `iter_5000.pth` 并完成 RSAR val mAP 评估
+- 保存 `iter_5000.pth` 并完成 RSAR test mAP 评估
 
 **结束必须 push**
 - Commit message 建议：`stage11: lora r16 5k early lr decay`
@@ -250,7 +252,7 @@ git push origin main
 - `docs/RESULTS.md`：追加 `E3-2k-r32` 的 mAP
 
 **验收**
-- 训练完成保存 `iter_2000.pth`；在 RSAR val 上评估得到 mAP
+- 训练完成保存 `iter_2000.pth`；在 RSAR test 上评估得到 mAP
 
 **结束必须 push**
 - Commit message 建议：`stage12: lora rank=32 ablation`
@@ -268,7 +270,7 @@ git push origin main
 - `docs/RESULTS.md`：追加对应 mAP
 
 **验收**
-- 训练完成保存 `iter_2000.pth`；在 RSAR val 上评估得到 mAP
+- 训练完成保存 `iter_2000.pth`；在 RSAR test 上评估得到 mAP
 
 **结束必须 push**
 - Commit message 建议：`stage13: dinov3 full fine-tune baseline`
@@ -286,7 +288,7 @@ git push origin main
 - `docs/RESULTS.md`：追加对应 mAP
 
 **验收**
-- 训练完成保存 `iter_2000.pth`；在 RSAR val 上评估得到 mAP
+- 训练完成保存 `iter_2000.pth`；在 RSAR test 上评估得到 mAP
 
 **结束必须 push**
 - Commit message 建议：`stage14: full fine-tune with lower lr`
@@ -304,7 +306,7 @@ git push origin main
 - `docs/RESULTS.md`：追加对应 mAP
 
 **验收**
-- 训练完成保存 `iter_2000.pth`；在 RSAR val 上评估得到 mAP
+- 训练完成保存 `iter_2000.pth`；在 RSAR test 上评估得到 mAP
 
 **结束必须 push**
 - Commit message 建议：`stage15: convnext-base frozen`
@@ -322,7 +324,7 @@ git push origin main
 - `docs/RESULTS.md`：追加对应 mAP
 
 **验收**
-- 训练完成保存 `iter_2000.pth`；在 RSAR val 上评估得到 mAP
+- 训练完成保存 `iter_2000.pth`；在 RSAR test 上评估得到 mAP
 
 **结束必须 push**
 - Commit message 建议：`stage16: convnext-base lora r16`
@@ -340,7 +342,7 @@ git push origin main
 - `docs/RESULTS.md`：追加对应 mAP
 
 **验收**
-- 训练完成保存 `iter_2000.pth`；在 RSAR val 上评估得到 mAP
+- 训练完成保存 `iter_2000.pth`；在 RSAR test 上评估得到 mAP
 
 **结束必须 push**
 - Commit message 建议：`stage17: convnext-base full fine-tune low lr`
@@ -358,7 +360,7 @@ git push origin main
 - `docs/RESULTS.md`：追加对应 mAP
 
 **验收**
-- 训练完成保存 `iter_2000.pth`；在 RSAR val 上评估得到 mAP
+- 训练完成保存 `iter_2000.pth`；在 RSAR test 上评估得到 mAP
 
 **结束必须 push**
 - Commit message 建议：`stage18: lora target fc2 only`
@@ -376,7 +378,7 @@ git push origin main
 - `docs/RESULTS.md`：追加对应 mAP
 
 **验收**
-- 训练完成保存 `iter_2000.pth`；在 RSAR val 上评估得到 mAP
+- 训练完成保存 `iter_2000.pth`；在 RSAR test 上评估得到 mAP
 
 **结束必须 push**
 - Commit message 建议：`stage19: lora target stage3 only`
@@ -394,7 +396,7 @@ git push origin main
 - `docs/RESULTS.md`：追加对应 mAP
 
 **验收**
-- 训练完成保存 `iter_2000.pth`；在 RSAR val 上评估得到 mAP
+- 训练完成保存 `iter_2000.pth`；在 RSAR test 上评估得到 mAP
 
 **结束必须 push**
 - Commit message 建议：`stage20: lora target stage23`
@@ -411,7 +413,7 @@ git push origin main
 - `docs/RESULTS.md`：追加多 seed 表格（含 mean/std）
 
 **验收**
-- 至少 3 个 seed 全部完成训练与 val mAP；生成汇总表
+- 至少 3 个 seed 全部完成训练与 test mAP；生成汇总表
 
 **结束必须 push**
 - Commit message 建议：`stage21: multi-seed stability (lora r16)`
@@ -431,7 +433,7 @@ git push origin main
 - `README.md`：更新结果速览（若均值显著变化）
 
 **验收**
-- seed=0/1/2 均完成训练与 val mAP；生成 mean/std
+- seed=0/1/2 均完成训练与 test mAP；生成 mean/std
 
 **结束必须 push**
 - Commit message 建议：`stage22: multi-seed stability (lora r16 10k)`

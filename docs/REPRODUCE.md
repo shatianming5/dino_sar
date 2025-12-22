@@ -60,14 +60,14 @@ bash scripts/train_baseline.sh \
   1
 ```
 
-验证集评估：
+测试集评估（默认读取 config 的 `data.test`）：
 
 ```bash
 bash scripts/eval_baseline.sh \
   configs/baselines/rotated_retinanet_obb_r50_fpn_rsar_le90_2kiter.py \
   outputs/baselines/retinanet_r50_fpn_rsar_le90_train_2kiter/iter_2000.pth \
   1 \
-  outputs/eval/baseline_r50_2k_val
+  outputs/eval/baseline_r50_2k_test
 ```
 
 ---
@@ -87,14 +87,14 @@ bash scripts/train_baseline.sh \
   1
 ```
 
-验证集评估：
+测试集评估（默认读取 config 的 `data.test`）：
 
 ```bash
 bash scripts/eval_baseline.sh \
   configs/dinov3_lora/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r8_2kiter.py \
   outputs/dinov3_lora/retinanet_timm_convnext_small_dinov3_lora_r8_train_2kiter/iter_2000.pth \
   1 \
-  outputs/eval/dinov3_lora_r8_val
+  outputs/eval/dinov3_lora_r8_test
 ```
 
 结果表：`docs/RESULTS.md`

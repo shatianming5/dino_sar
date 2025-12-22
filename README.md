@@ -16,9 +16,10 @@
 - `docs/RESULTS.md`：结果表（统一口径）
 - `docs/ROBUSTNESS.md`：鲁棒性曲线（干扰注入）
 
-## 结果速览（RSAR val，mAP@0.5）
+## 结果速览（RSAR test，mAP@0.5）
 
-> 完整结果与更多消融见 `docs/RESULTS.md`；默认都是 2k iters（除非特别说明）。
+> 完整结果与更多消融见 `docs/RESULTS.md`；默认都是 2k iters（除非特别说明）。  
+> 注意：`scripts/eval_baseline.sh` 默认评估 config 的 `data.test`（本仓库 RSAR 配置默认指向 `test/`）。
 
 | Setting | mAP(0.5) | Config |
 |---|---:|---|
