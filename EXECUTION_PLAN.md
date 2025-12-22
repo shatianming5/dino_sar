@@ -203,6 +203,22 @@ git push origin main
 
 ---
 
+### Step 10（扩展实验）：LoRA r=16 更长 schedule（5k iters）
+
+**目标**
+- 在当前最优 LoRA r=16 的基础上延长训练（5k iters），验证 mAP 是否继续提升
+
+**产出物（仓库内）**
+- `configs/dinov3_lora/*_r16_5kiter.py`：更长 schedule 配置
+- `scripts/reproduce_lora_r16_5k.sh`：一键复现脚本
+- `docs/RESULTS.md`：追加 `E3-5k-r16` 的 mAP
+
+**验收**
+- 训练完成保存 `iter_5000.pth`；在 RSAR val 上评估得到 mAP
+
+**结束必须 push**
+- Commit message 建议：`stage10: lora r16 longer schedule (5k)`
+
 ## 2. 兜底路线（当 Step 3/4 在 RSAR/DOTA 卡住时启用）
 
 **启用条件（建议）**

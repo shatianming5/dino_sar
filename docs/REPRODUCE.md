@@ -122,3 +122,8 @@ conda run -n dino_sar python tools/jamming/run_curve.py \
 
 - LoRA rank=16：`configs/dinov3_lora/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r16_2kiter.py`
 - 一键脚本：`scripts/reproduce_lora_r16_2k.sh`
+
+## 7) 更长训练（可选）
+
+- LoRA rank=16, 5k iters：`configs/dinov3_lora/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r16_5kiter.py`
+- 一键脚本：`scripts/reproduce_lora_r16_5k.sh`
