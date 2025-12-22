@@ -1,0 +1,118 @@
+# 复现指南（Step9）
+
+**GitHub 仓库（所有阶段都 push 到这里）：** https://github.com/shatianming5/dino_sar  
+**强制规则：** 每个阶段（Step）结束必须 `commit + push`
+
+---
+
+## 0) 前置条件
+
+- 已安装 Conda（推荐 Miniconda）
+- 有可用 NVIDIA GPU（本项目主线以 CUDA 训练/评估）
+- RSAR 数据已放到仓库根目录（不提交到 Git）：
+  - `train/`
+  - `val/`
+  - `test/`
+
+目录结构参考：`docs/DATA.md`
+
+---
+
+## 1) 环境安装（主线 MMRotate + timm 权重）
+
+按 `docs/ENV_SETUP.md` 执行即可；核心命令如下：
+
+```bash
+conda env create -f environment.yml
+conda activate dino_sar
+
+pip install --index-url https://download.pytorch.org/whl/cu118 torch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2
+
+pip install -U openmim
+mim install -U "mmcv-full==1.7.2"
+pip install -U "mmdet>=2.25.1,<3.0.0" "mmrotate==0.3.4"
+```
+
+冒烟检查：
+
+```bash
+python tools/smoke_test/check_openmmlab.py
+```
+
+---
+
+## 2) 数据体检（可选但建议）
+
+```bash
+conda run -n dino_sar python tools/data_audit/rsar_dota_audit.py --root . --ann-samples 200
+```
+
+---
+
+## 3) Baseline（R50-FPN, 2k iters）
+
+训练：
+
+```bash
+bash scripts/train_baseline.sh \
+  configs/baselines/rotated_retinanet_obb_r50_fpn_rsar_le90_2kiter.py \
+  outputs/baselines/retinanet_r50_fpn_rsar_le90_train_2kiter \
+  1
+```
+
+验证集评估：
+
+```bash
+bash scripts/eval_baseline.sh \
+  configs/baselines/rotated_retinanet_obb_r50_fpn_rsar_le90_2kiter.py \
+  outputs/baselines/retinanet_r50_fpn_rsar_le90_train_2kiter/iter_2000.pth \
+  1 \
+  outputs/eval/baseline_r50_2k_val
+```
+
+---
+
+## 4) DINOv3 + LoRA（ConvNeXt-S, r=8, 2k iters）
+
+说明：
+- 本仓库默认使用 `timm/convnext_small.dinov3_lvd1689m`（HuggingFace 下载，非 gated）
+- LoRA 可训练参数比例会在日志里输出（约 2%）
+
+训练：
+
+```bash
+bash scripts/train_baseline.sh \
+  configs/dinov3_lora/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r8_2kiter.py \
+  outputs/dinov3_lora/retinanet_timm_convnext_small_dinov3_lora_r8_train_2kiter \
+  1
+```
+
+验证集评估：
+
+```bash
+bash scripts/eval_baseline.sh \
+  configs/dinov3_lora/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r8_2kiter.py \
+  outputs/dinov3_lora/retinanet_timm_convnext_small_dinov3_lora_r8_train_2kiter/iter_2000.pth \
+  1 \
+  outputs/eval/dinov3_lora_r8_val
+```
+
+结果表：`docs/RESULTS.md`
+
+---
+
+## 5) 鲁棒性（Step8，可选）
+
+参考 `docs/ROBUSTNESS.md`，一键生成子集并跑曲线：
+
+```bash
+conda run -n dino_sar python tools/jamming/make_subset.py --split val --n 200
+
+conda run -n dino_sar python tools/jamming/run_curve.py \
+  --config configs/robustness/retinanet_dinov3_lora_r8_jam_gaussian.py \
+  --ckpt outputs/dinov3_lora/retinanet_timm_convnext_small_dinov3_lora_r8_train_2kiter/iter_2000.pth \
+  --subset-dir outputs/datasets/rsar_val_200 \
+  --sigmas 0,0.05,0.1,0.2 \
+  --out outputs/robustness/lora_r8_gauss
+```
+
