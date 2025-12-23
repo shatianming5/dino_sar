@@ -6,7 +6,7 @@ from torch import nn
 
 from mmrotate.models.builder import ROTATED_BACKBONES
 
-from dino_sar.models.lora import count_parameters, inject_lora_linear
+from dino_sar.models.lora import count_parameters, inject_lora_conv2d, inject_lora_linear
 
 
 @ROTATED_BACKBONES.register_module()
@@ -22,6 +22,7 @@ class Dinov3TimmConvNeXtLoRA(nn.Module):
         lora_alpha: float = 16.0,
         lora_dropout: float = 0.0,
         lora_target_keywords: Sequence[str] = ("mlp.fc1", "mlp.fc2"),
+        lora_target_conv_keywords: Sequence[str] = (),
         verbose: bool = True,
     ) -> None:
         super().__init__()
@@ -46,13 +47,23 @@ class Dinov3TimmConvNeXtLoRA(nn.Module):
         for p in self.backbone.parameters():
             p.requires_grad_(False)
 
-        replaced = inject_lora_linear(
+        replaced_linear = inject_lora_linear(
             self.backbone,
             target_keywords=tuple(lora_target_keywords),
             r=lora_r,
             alpha=lora_alpha,
             dropout=lora_dropout,
         )
+
+        replaced_conv = 0
+        if lora_target_conv_keywords:
+            replaced_conv = inject_lora_conv2d(
+                self.backbone,
+                target_keywords=tuple(lora_target_conv_keywords),
+                r=lora_r,
+                alpha=lora_alpha,
+                dropout=lora_dropout,
+            )
 
         if verbose:
             total = count_parameters(self.backbone, trainable_only=False)
@@ -61,7 +72,8 @@ class Dinov3TimmConvNeXtLoRA(nn.Module):
                 from mmcv.utils import print_log
 
                 print_log(
-                    f"[Dinov3TimmConvNeXtLoRA] replaced_linear={replaced}, "
+                    f"[Dinov3TimmConvNeXtLoRA] replaced_linear={replaced_linear}, "
+                    f"replaced_conv={replaced_conv}, "
                     f"trainable={trainable:,}/{total:,} ({trainable/total:.2%})",
                     logger="root",
                 )
@@ -71,4 +83,3 @@ class Dinov3TimmConvNeXtLoRA(nn.Module):
     def forward(self, x):
         outs = self.backbone(x)
         return list(outs)
-

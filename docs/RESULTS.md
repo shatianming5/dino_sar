@@ -35,6 +35,7 @@
 | E3-10k-r16-fc2 | DINOv3 + LoRA (ConvNeXt-S, r=16, target=fc2 only, 10k iters) | 0.5118 | `configs/lora_target_ablation/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r16_fc2only_10kiter.py` |
 | E3-10k-r16-stage3 | DINOv3 + LoRA (ConvNeXt-S, r=16, target=stage3 only, 10k iters) | 0.4059 | `configs/lora_target_ablation/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r16_stage3_10kiter.py` |
 | E3-10k-r16-stage23 | DINOv3 + LoRA (ConvNeXt-S, r=16, target=stages2+3, 10k iters) | 0.5245 | `configs/lora_target_ablation/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r16_stage23_10kiter.py` |
+| E3-10k-r16-stage23-convdown | DINOv3 + LoRA (ConvNeXt-S, r=16, target=stages2+3 + convdown, 10k iters) | - | `configs/lora_target_ablation/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r16_stage23_convdown_10kiter.py` |
 | E3-2k-cnbase-r16 | DINOv3 + LoRA (ConvNeXt-Base, r=16, 2k iters) | 0.1359 | `configs/dinov3_lora/retinanet_dinov3_timm_convnext_base_fpn_rsar_le90_lora_r16_2kiter.py` |
 | E3-10k-cnbase-r16 | DINOv3 + LoRA (ConvNeXt-Base, r=16, 10k iters) | 0.5286 | `configs/dinov3_lora/retinanet_dinov3_timm_convnext_base_fpn_rsar_le90_lora_r16_10kiter.py` |
 | E3-2k-r32 | DINOv3 + LoRA (ConvNeXt-S, r=32, 2k iters) | 0.3153 | `configs/dinov3_lora/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r32_2kiter.py` |
@@ -51,6 +52,7 @@
 | LoRA r=16 (2k iters) `configs/dinov3_lora/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r16_2kiter.py` | 0.2004 | 0.1866 | 0.2739 | 0.2203 | 0.0469 |
 | LoRA r=16 (10k iters, step=1600/9000) `configs/dinov3_lora/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r16_10kiter.py` | 0.5150 | 0.5069 | 0.5287 | 0.5169 | 0.0111 |
 | LoRA r=16 target=stages2+3 (10k iters) `configs/lora_target_ablation/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r16_stage23_10kiter.py` | 0.5245 | 0.5257 | 0.5075 | 0.5192 | 0.0102 |
+| LoRA r=16 target=stages2+3 + convdown (10k iters) `configs/lora_target_ablation/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r16_stage23_convdown_10kiter.py` | - | - | - | - | - |
 | LoRA r=16 ConvNeXt-Base (10k iters, step=1600/9000) `configs/dinov3_lora/retinanet_dinov3_timm_convnext_base_fpn_rsar_le90_lora_r16_10kiter.py` | 0.5286 | 0.4825 | 0.5102 | 0.5071 | 0.0232 |
 
 > 备注：mmrotate `0.3.4` 在 CUDA 推理阶段 `multiclass_nms_rotated` 存在 device mismatch 问题，本仓库用 `dino_sar/patches/mmrotate_nms_device.py` 做了运行时修复。

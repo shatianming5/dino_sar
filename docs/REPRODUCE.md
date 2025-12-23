@@ -159,6 +159,7 @@ conda run -n dino_sar python tools/jamming/run_curve.py \
 - fc2 only 10k：`scripts/reproduce_lora_r16_fc2only_10k.sh`
 - stages_3 only 10k：`scripts/reproduce_lora_r16_stage3_10k.sh`
 - stages_2+3 10k：`scripts/reproduce_lora_r16_stage23_10k.sh`
+- stages_2+3 + ConvLoRA(downsample) 10k：`scripts/reproduce_lora_r16_stage23_convdown_10k.sh`
 
 ## 10) 多 seed 稳定性（可选）
 
