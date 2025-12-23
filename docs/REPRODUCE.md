@@ -148,6 +148,7 @@ conda run -n dino_sar python tools/jamming/run_curve.py \
 
 - Frozen 2k：`scripts/reproduce_dinov3_frozen_convnext_base_2k.sh`
 - LoRA r16 2k：`scripts/reproduce_lora_r16_convnext_base_2k.sh`
+- LoRA r16 10k：`scripts/reproduce_lora_r16_convnext_base_10k.sh`
 - Full fine-tune (lr=2.5e-4) 2k：`scripts/reproduce_dinov3_full_convnext_base_2k_lr0p00025.sh`
 
 ## 9) LoRA target 消融（可选）
