@@ -474,6 +474,47 @@ git push origin main
 **结束必须 push**
 - Commit message 建议：`stage24: baseline multi-seed stability (r50 10k)`
 
+---
+
+### Step 25（扩展实验）：ConvNeXt-Base + LoRA r=16（10k）多 seed（3 seeds）
+
+**目标**
+- 验证更大 backbone（ConvNeXt-Base DINOv3）在 LoRA r=16 + 更长训练（10k）下的性能与稳定性
+
+**产出物（仓库内）**
+- `configs/dinov3_lora/retinanet_dinov3_timm_convnext_base_fpn_rsar_le90_lora_r16_10kiter.py`
+- `scripts/reproduce_lora_r16_convnext_base_10k.sh`
+- `scripts/run_multiseed_lora_r16_convnext_base_10k.sh`
+- `docs/RESULTS.md`：补充 `E3-10k-cnbase-r16` 与多 seed mean/std
+- `README.md`：如有必要，补充 mean±std 对比
+
+**验收**
+- seed=0/1/2 均完成训练与 test mAP；生成 mean/std
+
+**结束必须 push**
+- Commit message 建议：`stage25: convnext-base lora r16 10k multiseed`
+
+---
+
+### Step 26（扩展实验）：LoRA 插入位置 / target 扩展（在 10k 口径下验证）
+
+**目标**
+- 在当前最佳口径（10k + test mAP）下，探索 LoRA 更合理的插入位置/target：
+  - 继续验证不同 stage 选择（如 `stages_2+3`）在 10k 下是否更稳/更强
+  - 如需扩展到 Conv/Neck/Head，则实现并验证 `Conv2d` 版 LoRA（先单 seed，再 multi-seed）
+
+**产出物（仓库内）**
+- `configs/lora_target_ablation/`：新增 10k 口径的 target/stage 配置
+- `scripts/`：对应一键复现脚本（先 seed0，再 multi-seed）
+- （如做 Conv2d LoRA）`dino_sar/models/lora.py`：新增 Conv2d 注入实现
+- `docs/RESULTS.md`：补充新的 target/stage 实验结果
+
+**验收**
+- 至少 1-2 个新 target/stage 配置跑通并对比；最佳配置做 seed=0/1/2 给出 mean/std
+
+**结束必须 push**
+- Commit message 建议：`stage26: lora target expansion on 10k schedule`
+
 ## 2. 兜底路线（当 Step 3/4 在 RSAR/DOTA 卡住时启用）
 
 **启用条件（建议）**
