@@ -31,6 +31,7 @@
 | DINOv3 Full FT (ConvNeXt-Base, lr=2.5e-4, 2k) | 0.2570 | `configs/dinov3_full/retinanet_dinov3_timm_convnext_base_fpn_rsar_le90_full_2kiter_lr0p00025.py` |
 | **DINOv3 + LoRA（target=stages2+3，多 seed mean±std）** (ConvNeXt-S, r=16, 10k) | **0.5192±0.0102** | `configs/lora_target_ablation/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r16_stage23_10kiter.py` |
 | DINOv3 + LoRA（target=stage2 only，seed0） (ConvNeXt-S, r=16, 10k) | 0.5246 | `configs/lora_target_ablation/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r16_stage2_10kiter.py` |
+| DINOv3 + LoRA（target=stages1+2+3，seed0） (ConvNeXt-S, r=16, 10k) | 0.5172 | `configs/lora_target_ablation/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r16_stage123_10kiter.py` |
 | DINOv3 + LoRA（full targets，多 seed mean±std） (ConvNeXt-S, r=16, 10k) | 0.5169±0.0111 | `configs/dinov3_lora/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r16_10kiter.py` |
 | DINOv3 + LoRA（ConvNeXt-Base, r=16, 10k mean±std） | 0.5071±0.0232 | `configs/dinov3_lora/retinanet_dinov3_timm_convnext_base_fpn_rsar_le90_lora_r16_10kiter.py` |
 | DINOv3 + LoRA（单次 best） (ConvNeXt-S, r=16, 2k) | 0.3293 | `configs/dinov3_lora/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r16_2kiter.py` |
