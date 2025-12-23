@@ -158,7 +158,9 @@ conda run -n dino_sar python tools/jamming/run_curve.py \
 - stages_2+3：`scripts/reproduce_lora_r16_stage23_2k.sh`
 - fc2 only 10k：`scripts/reproduce_lora_r16_fc2only_10k.sh`
 - stages_3 only 10k：`scripts/reproduce_lora_r16_stage3_10k.sh`
+- stages_2 only 10k：`scripts/reproduce_lora_r16_stage2_10k.sh`
 - stages_2+3 10k：`scripts/reproduce_lora_r16_stage23_10k.sh`
+- stages_1+2+3 10k：`scripts/reproduce_lora_r16_stage123_10k.sh`
 - stages_2+3 + ConvLoRA(downsample) 10k：`scripts/reproduce_lora_r16_stage23_convdown_10k.sh`
 
 ## 10) 多 seed 稳定性（可选）
@@ -168,5 +170,7 @@ conda run -n dino_sar python tools/jamming/run_curve.py \
 ## 11) 更长训练 + 多 seed（可选）
 
 - LoRA r16 10k（seed=0/1/2）：`scripts/run_multiseed_lora_r16_10k.sh`
+- LoRA r16 stage2 10k（seed=0/1/2）：`scripts/run_multiseed_lora_r16_stage2_10k.sh`
 - LoRA r16 stage23 10k（seed=0/1/2）：`scripts/run_multiseed_lora_r16_stage23_10k.sh`
+- LoRA r16 stage123 10k（seed=0/1/2）：`scripts/run_multiseed_lora_r16_stage123_10k.sh`
 - LoRA r16 stage23+convdown 10k（seed=0/1/2）：`scripts/run_multiseed_lora_r16_stage23_convdown_10k.sh`
