@@ -23,7 +23,7 @@
 
 | Setting | mAP(0.5) | Config |
 |---|---:|---|
-| Baseline (Rotated RetinaNet R50-FPN, 10k) | 0.4625 | `configs/baselines/rotated_retinanet_obb_r50_fpn_rsar_le90_10kiter.py` |
+| Baseline (Rotated RetinaNet R50-FPN, 10k, mean±std) | 0.4769±0.0127 | `configs/baselines/rotated_retinanet_obb_r50_fpn_rsar_le90_10kiter.py` |
 | Baseline (Rotated RetinaNet R50-FPN, 2k, quick) | 0.0618 | `configs/baselines/rotated_retinanet_obb_r50_fpn_rsar_le90_2kiter.py` |
 | DINOv3 Frozen (ConvNeXt-S, 2k) | 0.0400 | `configs/dinov3_frozen/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_frozen_2kiter.py` |
 | DINOv3 Frozen (ConvNeXt-Base, 2k) | 0.0562 | `configs/dinov3_frozen/retinanet_dinov3_timm_convnext_base_fpn_rsar_le90_frozen_2kiter.py` |
@@ -37,7 +37,8 @@
 - Target：`stages_2+3`→0.3231（接近全量），`mlp.fc2` only→0.2320，`stages_3` only→0.1035
 - 5k iters：按比例延后 LR step→0.1771；保持早衰减→0.2904（仍不如 2k 单次 best）
 
-**多 seed 稳定性（LoRA r=16）**
+**多 seed 稳定性（RSAR test）**
+- Baseline 10k（seed=0/1/2）：0.4625 / 0.4813 / 0.4867；mean=0.4769，std=0.0127
 - 2k（seed=0/1/2）：0.2004 / 0.1866 / 0.2739；mean=0.2203，std=0.0469
 - 10k（seed=0/1/2）：0.5150 / 0.5069 / 0.5287；mean=0.5169，std=0.0111（见 `docs/RESULTS.md`）
 
