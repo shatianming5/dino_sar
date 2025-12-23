@@ -169,3 +169,4 @@ conda run -n dino_sar python tools/jamming/run_curve.py \
 
 - LoRA r16 10k（seed=0/1/2）：`scripts/run_multiseed_lora_r16_10k.sh`
 - LoRA r16 stage23 10k（seed=0/1/2）：`scripts/run_multiseed_lora_r16_stage23_10k.sh`
+- LoRA r16 stage23+convdown 10k（seed=0/1/2）：`scripts/run_multiseed_lora_r16_stage23_convdown_10k.sh`
