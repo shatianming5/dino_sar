@@ -42,6 +42,7 @@
 **多 seed 稳定性（RSAR test）**
 - Baseline 10k（seed=0/1/2）：0.4625 / 0.4813 / 0.4867；mean=0.4769，std=0.0127
 - LoRA stages_2+3 10k（seed=0/1/2）：0.5245 / 0.5257 / 0.5075；mean=0.5192，std=0.0102
+- LoRA stages_2+3 + convdown 10k（seed=0/1/2）：0.5374 / 0.5091 / 0.4661；mean=0.5042，std=0.0359（不稳定）
 - LoRA ConvNeXt-Base 10k（seed=0/1/2）：0.5286 / 0.4825 / 0.5102；mean=0.5071，std=0.0232
 - 2k（seed=0/1/2）：0.2004 / 0.1866 / 0.2739；mean=0.2203，std=0.0469
 - 10k（seed=0/1/2）：0.5150 / 0.5069 / 0.5287；mean=0.5169，std=0.0111（见 `docs/RESULTS.md`）
