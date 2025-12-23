@@ -47,6 +47,6 @@
 | Baseline R50-FPN (10k iters) `configs/baselines/rotated_retinanet_obb_r50_fpn_rsar_le90_10kiter.py` | 0.4625 | 0.4813 | 0.4867 | 0.4769 | 0.0127 |
 | LoRA r=16 (2k iters) `configs/dinov3_lora/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r16_2kiter.py` | 0.2004 | 0.1866 | 0.2739 | 0.2203 | 0.0469 |
 | LoRA r=16 (10k iters, step=1600/9000) `configs/dinov3_lora/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r16_10kiter.py` | 0.5150 | 0.5069 | 0.5287 | 0.5169 | 0.0111 |
-| LoRA r=16 ConvNeXt-Base (10k iters, step=1600/9000) `configs/dinov3_lora/retinanet_dinov3_timm_convnext_base_fpn_rsar_le90_lora_r16_10kiter.py` | 0.5286 | 0.4825 | - | - | - |
+| LoRA r=16 ConvNeXt-Base (10k iters, step=1600/9000) `configs/dinov3_lora/retinanet_dinov3_timm_convnext_base_fpn_rsar_le90_lora_r16_10kiter.py` | 0.5286 | 0.4825 | 0.5102 | 0.5071 | 0.0232 |
 
 > 备注：mmrotate `0.3.4` 在 CUDA 推理阶段 `multiclass_nms_rotated` 存在 device mismatch 问题，本仓库用 `dino_sar/patches/mmrotate_nms_device.py` 做了运行时修复。
