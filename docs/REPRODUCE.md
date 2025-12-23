@@ -167,3 +167,4 @@ conda run -n dino_sar python tools/jamming/run_curve.py \
 ## 11) 更长训练 + 多 seed（可选）
 
 - LoRA r16 10k（seed=0/1/2）：`scripts/run_multiseed_lora_r16_10k.sh`
+- LoRA r16 stage23 10k（seed=0/1/2）：`scripts/run_multiseed_lora_r16_stage23_10k.sh`
