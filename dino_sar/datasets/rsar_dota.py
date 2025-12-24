@@ -9,7 +9,7 @@ from typing import Any
 
 import numpy as np
 
-from mmrotate.core import poly2obb_np
+from mmrotate.core import obb2poly_np, poly2obb_np
 from mmrotate.datasets.builder import ROTATED_DATASETS
 from mmrotate.datasets.dota import DOTADataset
 
@@ -19,13 +19,22 @@ class RSARDOTADataset(DOTADataset):
     """RSAR in DOTA polygon format (OBB), with mixed image suffixes.
 
     Differences vs upstream DOTADataset:
-    - CLASSES only contains `ship`
+    - Supports all RSAR classes (6 classes by default)
     - Resolves image filename by scanning `img_prefix` for common suffixes
       (RSAR contains both .jpg and .png).
     """
 
-    CLASSES = ("ship",)
-    PALETTE = [(255, 64, 64)]
+    # RSAR official labels (6 classes).
+    # NOTE: Keep names in lower-case to match annotation text.
+    CLASSES = ("aircraft", "bridge", "car", "harbor", "ship", "tank")
+    PALETTE = [
+        (255, 64, 64),    # aircraft
+        (64, 255, 64),    # bridge
+        (64, 64, 255),    # car
+        (255, 255, 64),   # harbor
+        (255, 64, 255),   # ship
+        (64, 255, 255),   # tank
+    ]
 
     def __init__(
         self,
@@ -106,17 +115,33 @@ class RSARDOTADataset(DOTADataset):
             with open(ann_file, encoding="utf-8", errors="ignore") as f:
                 for raw in f:
                     bbox_info = raw.split()
-                    if len(bbox_info) < 10:
+                    if len(bbox_info) < 6:
                         continue
 
-                    poly = np.array(bbox_info[:8], dtype=np.float32)
-                    try:
-                        x, y, w, h, a = poly2obb_np(poly, self.version)
-                    except Exception:
-                        continue
-
-                    cls_name = bbox_info[8]
-                    difficulty = int(bbox_info[9])
+                    # RSAR annotations are commonly in DOTA style:
+                    #   x1 y1 x2 y2 x3 y3 x4 y4 class [difficulty]
+                    # But some conversions may store OBB directly:
+                    #   xc yc w h angle class [difficulty]
+                    poly = None
+                    if len(bbox_info) >= 9:
+                        poly = np.array(bbox_info[:8], dtype=np.float32)
+                        cls_name = bbox_info[8]
+                        difficulty = int(bbox_info[9]) if len(bbox_info) > 9 else 0
+                        try:
+                            x, y, w, h, a = poly2obb_np(poly, self.version)
+                        except Exception:
+                            continue
+                    else:
+                        try:
+                            x, y, w, h, a = map(float, bbox_info[:5])
+                        except Exception:
+                            continue
+                        cls_name = bbox_info[5]
+                        difficulty = int(bbox_info[6]) if len(bbox_info) > 6 else 0
+                        try:
+                            poly = obb2poly_np(np.array([x, y, w, h, a], dtype=np.float32), version=self.version)
+                        except Exception:
+                            poly = None
                     if difficulty > self.difficulty:
                         continue
 
@@ -125,12 +150,13 @@ class RSARDOTADataset(DOTADataset):
 
                     gt_bboxes.append([x, y, w, h, a])
                     gt_labels.append(cls_map[cls_name])
-                    gt_polygons.append(poly)
+                    if poly is not None:
+                        gt_polygons.append(np.array(poly, dtype=np.float32))
 
             if gt_bboxes:
                 data_info["ann"]["bboxes"] = np.array(gt_bboxes, dtype=np.float32)
                 data_info["ann"]["labels"] = np.array(gt_labels, dtype=np.int64)
-                data_info["ann"]["polygons"] = np.array(gt_polygons, dtype=np.float32)
+                data_info["ann"]["polygons"] = np.array(gt_polygons, dtype=np.float32) if gt_polygons else np.zeros((0, 8), dtype=np.float32)
             else:
                 data_info["ann"]["bboxes"] = np.zeros((0, 5), dtype=np.float32)
                 data_info["ann"]["labels"] = np.array([], dtype=np.int64)

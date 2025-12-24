@@ -29,6 +29,17 @@ x1 y1 x2 y2 x3 y3 x4 y4 class difficulty
 
 例如：`train/annfiles/0000501.txt`
 
+## 1b) 类别（RSAR 6 类）
+
+本仓库默认按 RSAR 官方 6 类训练/评估（类别名需与标注文本一致，均为小写）：
+
+- `aircraft`
+- `bridge`
+- `car`
+- `harbor`
+- `ship`
+- `tank`
+
 ---
 
 ## 2) 数据不进 Git（必须遵守）

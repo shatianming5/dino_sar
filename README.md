@@ -6,7 +6,7 @@
 
 ## 这是什么
 
-用 **DINOv3 + LoRA** 做 **SAR 船只检测** 的工程与实验记录；主线数据集 **RSAR（DOTA/OBB）**，兜底验证 **HRSID（HBB）**。
+用 **DINOv3 + LoRA** 做 **SAR 目标检测（OBB）** 的工程与实验记录；主线数据集 **RSAR（6 类，DOTA/OBB）**，兜底验证 **HRSID（HBB）**。
 
 ## 文档入口
 
@@ -52,3 +52,5 @@
 ## 数据说明（不进 Git）
 
 本仓库不提交数据集文件（`train/`、`val/`、`test/` 已在 `.gitignore` 中忽略）。在本机准备好数据后再进行训练/评估。
+
+RSAR 默认 6 类（标注文本全小写）：`aircraft` / `bridge` / `car` / `harbor` / `ship` / `tank`（详见 `docs/DATA.md`）。
