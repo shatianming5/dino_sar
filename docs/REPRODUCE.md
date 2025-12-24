@@ -83,7 +83,7 @@ bash scripts/reproduce_baseline_r50_10k.sh 1 0
 ## 3c) Baseline 多 seed（R50-FPN, 10k iters，可选）
 
 ```bash
-bash scripts/run_multiseed_baseline_r50_10k.sh 1
+DINO_SAR_RUN_TAG=6class_scorethr0p05 bash scripts/run_multiseed_baseline_r50_10k_6class.sh 1
 ```
 
 ---
@@ -166,13 +166,15 @@ conda run -n dino_sar python tools/jamming/run_curve.py \
 
 ## 10) 多 seed 稳定性（可选）
 
-- LoRA r16 2k（seed=0/1/2）：`scripts/run_multiseed_lora_r16_2k.sh`
+- LoRA r16 2k（seed=0/1/2）：`scripts/run_multiseed_lora_r16_2k_6class.sh`
 
 ## 11) 更长训练 + 多 seed（可选）
 
-- LoRA r16 10k（seed=0/1/2）：`scripts/run_multiseed_lora_r16_10k.sh`
+- LoRA r16 10k（seed=0/1/2）：`scripts/run_multiseed_lora_r16_10k_6class.sh`
 - LoRA r16 stage2 10k（seed=0/1/2）：`scripts/run_multiseed_lora_r16_stage2_10k.sh`
-- LoRA r16 stage23 10k（seed=0/1/2）：`scripts/run_multiseed_lora_r16_stage23_10k.sh`
+- LoRA r16 stage23 10k（seed=0/1/2）：`scripts/run_multiseed_lora_r16_stage23_10k_6class.sh`
 - LoRA r16 stage123 10k（seed=0/1/2）：`scripts/run_multiseed_lora_r16_stage123_10k.sh`
 - LoRA r16 stage23+convdown 10k（seed=0/1/2）：`scripts/run_multiseed_lora_r16_stage23_convdown_10k.sh`
 - LoRA r16 stage23+convdown23 10k（seed=0/1/2）：`scripts/run_multiseed_lora_r16_stage23_convdown23_10k.sh`
+
+> 备注：本仓库早期为 ship-only 口径，部分旧脚本会复用历史输出目录；建议优先使用带 `_6class.sh` 后缀的脚本，并通过 `DINO_SAR_RUN_TAG=<tag>` 写入独立输出目录，避免误用旧 checkpoint。
