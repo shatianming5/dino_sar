@@ -20,6 +20,7 @@
 
 > 完整结果与更多消融见 `docs/RESULTS.md`；默认都是 2k iters（除非特别说明）。  
 > 注意：`scripts/eval_baseline.sh` 默认评估 config 的 `data.test`（本仓库 RSAR 配置默认指向 `test/`）。
+> 重要：下表为历史结果（曾使用 ship-only/1 类口径）；当前仓库默认 RSAR 6 类后需重新跑实验，mAP 不可直接对比。
 
 | Setting | mAP(0.5) | Config |
 |---|---:|---|
