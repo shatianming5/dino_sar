@@ -46,7 +46,7 @@ write_multiseed_report() {
   m1="$(read_map_from_eval_dir "${base_eval_dir}/seed1")"
   m2="$(read_map_from_eval_dir "${base_eval_dir}/seed2")"
 
-  python - <<PY
+  python - <<PY > "${LOG_DIR}/_stats.tmp"
 import math
 vals = []
 for s in [${m0@Q}, ${m1@Q}, ${m2@Q}]:
@@ -61,7 +61,7 @@ print("m1", ${m1@Q})
 print("m2", ${m2@Q})
 print("mean", mean)
 print("std", std)
-PY > "${LOG_DIR}/_stats.tmp"
+PY
 
   local mean std
   mean="$(rg -n '^mean ' "${LOG_DIR}/_stats.tmp" | awk '{print $2}')"
@@ -136,4 +136,3 @@ write_multiseed_report \
 commit_and_push "repro: rsar 6-class multiseed lora r16 stage23 10k (${RUN_DATE})" "${REPORT2}"
 
 echo "[DONE] 6-class rerun completed."
-
