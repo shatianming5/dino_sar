@@ -4,8 +4,9 @@ set -euo pipefail
 GPUS="${1:-1}"
 
 CONFIG="configs/dinov3_lora/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r16_2kiter.py"
-BASE_WORK_DIR="outputs/multiseed_6class/lora_r16_2k"
-BASE_EVAL_DIR="outputs/eval_6class/multiseed_lora_r16_2k"
+RUN_TAG="${DINO_SAR_RUN_TAG:-6class}"
+BASE_WORK_DIR="outputs/multiseed_${RUN_TAG}/lora_r16_2k"
+BASE_EVAL_DIR="outputs/eval_${RUN_TAG}/multiseed_lora_r16_2k"
 
 SEEDS=("0" "1" "2")
 
@@ -26,4 +27,3 @@ for SEED in "${SEEDS[@]}"; do
     bash scripts/eval_baseline.sh "${CONFIG}" "${WORK_DIR}/iter_2000.pth" "${GPUS}" "${EVAL_DIR}"
   fi
 done
-

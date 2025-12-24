@@ -2,12 +2,15 @@
 set -euo pipefail
 
 GPUS="${1:-1}"
+RUN_TAG="${2:-6class_scorethr0p05}"
 
 RUN_DATE="$(date +%Y-%m-%d)"
 RUN_TS="$(date +%Y%m%d_%H%M%S)"
 GIT_SHA="$(git rev-parse --short HEAD)"
 
-LOG_DIR="outputs/_rerun_6class/logs/${RUN_TS}"
+export DINO_SAR_RUN_TAG="${RUN_TAG}"
+
+LOG_DIR="outputs/_rerun_6class/logs/${RUN_TAG}/${RUN_TS}"
 mkdir -p "${LOG_DIR}"
 
 ensure_clean_git() {
@@ -73,6 +76,7 @@ PY
 
 - 日期：${RUN_DATE}
 - 代码版本：${GIT_SHA}
+- RUN_TAG：${RUN_TAG}
 - 命令：\`${cmd}\`
 - 配置：\`${config}\`
 - seeds：\`0/1/2\`
@@ -108,31 +112,31 @@ ensure_clean_git
 echo "[1/2] multiseed LoRA r16 2k (6-class) ..."
 bash scripts/run_multiseed_lora_r16_2k_6class.sh "${GPUS}" > "${LOG_DIR}/run_multiseed_lora_r16_2k_6class.log" 2>&1
 
-REPORT1="docs/repro_runs/${RUN_DATE}_6class_multiseed_lora_r16_2k.md"
+REPORT1="docs/repro_runs/${RUN_DATE}_6class_${RUN_TAG}_multiseed_lora_r16_2k.md"
 write_multiseed_report \
   "${REPORT1}" \
   "复现记录：RSAR 6-class / LoRA r16（2k iters）多 seed（test）" \
-  "bash scripts/run_multiseed_lora_r16_2k_6class.sh ${GPUS}" \
+  "DINO_SAR_RUN_TAG=${RUN_TAG} bash scripts/run_multiseed_lora_r16_2k_6class.sh ${GPUS}" \
   "configs/dinov3_lora/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r16_2kiter.py" \
-  "outputs/multiseed_6class/lora_r16_2k" \
-  "outputs/eval_6class/multiseed_lora_r16_2k"
+  "outputs/multiseed_${RUN_TAG}/lora_r16_2k" \
+  "outputs/eval_${RUN_TAG}/multiseed_lora_r16_2k"
 
-commit_and_push "repro: rsar 6-class multiseed lora r16 2k (${RUN_DATE})" "${REPORT1}"
+commit_and_push "repro: rsar 6-class multiseed lora r16 2k (${RUN_DATE}, ${RUN_TAG})" "${REPORT1}"
 
 ensure_clean_git
 
 echo "[2/2] multiseed LoRA r16 stage23 10k (6-class) ..."
 bash scripts/run_multiseed_lora_r16_stage23_10k_6class.sh "${GPUS}" > "${LOG_DIR}/run_multiseed_lora_r16_stage23_10k_6class.log" 2>&1
 
-REPORT2="docs/repro_runs/${RUN_DATE}_6class_multiseed_lora_r16_stage23_10k.md"
+REPORT2="docs/repro_runs/${RUN_DATE}_6class_${RUN_TAG}_multiseed_lora_r16_stage23_10k.md"
 write_multiseed_report \
   "${REPORT2}" \
   "复现记录：RSAR 6-class / LoRA r16 target=stages2+3（10k iters）多 seed（test）" \
-  "bash scripts/run_multiseed_lora_r16_stage23_10k_6class.sh ${GPUS}" \
+  "DINO_SAR_RUN_TAG=${RUN_TAG} bash scripts/run_multiseed_lora_r16_stage23_10k_6class.sh ${GPUS}" \
   "configs/lora_target_ablation/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r16_stage23_10kiter.py" \
-  "outputs/multiseed_6class/lora_r16_stage23_10k" \
-  "outputs/eval_6class/multiseed_lora_r16_stage23_10k"
+  "outputs/multiseed_${RUN_TAG}/lora_r16_stage23_10k" \
+  "outputs/eval_${RUN_TAG}/multiseed_lora_r16_stage23_10k"
 
-commit_and_push "repro: rsar 6-class multiseed lora r16 stage23 10k (${RUN_DATE})" "${REPORT2}"
+commit_and_push "repro: rsar 6-class multiseed lora r16 stage23 10k (${RUN_DATE}, ${RUN_TAG})" "${REPORT2}"
 
 echo "[DONE] 6-class rerun completed."
