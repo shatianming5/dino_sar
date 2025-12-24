@@ -10,6 +10,7 @@
 - RSAR（DOTA-OBB）使用 **mAP@IoU=0.5**
 - RSAR 默认 6 类：`aircraft` / `bridge` / `car` / `harbor` / `ship` / `tank`
 - 默认使用 `mim test` 的 `cfg.data.test` 作为评估 split（本仓库 RSAR 配置默认指向 `test/`）
+- 评估默认阈值：`cfg.model.test_cfg.score_thr=0.05`（避免产生过多候选框导致评估极慢）
 
 > 注意：本仓库早期版本曾用过 “ship-only（只保留 ship 标签）” 的设置；修复为 6 类后，历史 mAP 不可直接对比。
 
