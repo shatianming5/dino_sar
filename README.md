@@ -23,6 +23,7 @@
 > 重要：下表为历史结果（曾使用 ship-only/1 类口径）；当前仓库默认 RSAR 6 类后需重新跑实验，mAP 不可直接对比。
 
 **RSAR 6-class 最新复现（test，mAP@0.5）**
+- Baseline R50-FPN (10k, mean±std)：0.1008±0.0203（见 `docs/repro_runs/2025-12-24_6class_scorethr0p05_multiseed_baseline_r50_10k.md`）
 - LoRA r=16 (2k, mean±std)：0.0320±0.0058（见 `docs/repro_runs/2025-12-24_6class_scorethr0p05_multiseed_lora_r16_2k.md`）
 - LoRA r=16 target=stages2+3 (10k, mean±std)：0.0846±0.0023（见 `docs/repro_runs/2025-12-24_6class_scorethr0p05_multiseed_lora_r16_stage23_10k.md`）
 
