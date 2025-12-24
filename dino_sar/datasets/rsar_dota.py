@@ -125,7 +125,7 @@ class RSARDOTADataset(DOTADataset):
                     poly = None
                     if len(bbox_info) >= 9:
                         poly = np.array(bbox_info[:8], dtype=np.float32)
-                        cls_name = bbox_info[8]
+                        cls_name = bbox_info[8].lower()
                         difficulty = int(bbox_info[9]) if len(bbox_info) > 9 else 0
                         try:
                             x, y, w, h, a = poly2obb_np(poly, self.version)
@@ -136,10 +136,15 @@ class RSARDOTADataset(DOTADataset):
                             x, y, w, h, a = map(float, bbox_info[:5])
                         except Exception:
                             continue
-                        cls_name = bbox_info[5]
+                        cls_name = bbox_info[5].lower()
                         difficulty = int(bbox_info[6]) if len(bbox_info) > 6 else 0
                         try:
-                            poly = obb2poly_np(np.array([x, y, w, h, a], dtype=np.float32), version=self.version)
+                            poly = obb2poly_np(
+                                np.array([[x, y, w, h, a]], dtype=np.float32), version=self.version
+                            )
+                            poly = np.asarray(poly, dtype=np.float32).reshape(-1)
+                            if poly.shape[0] != 8:
+                                poly = None
                         except Exception:
                             poly = None
                     if difficulty > self.difficulty:
