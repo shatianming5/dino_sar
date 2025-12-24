@@ -16,7 +16,18 @@
 
 ---
 
-## 主结果表
+## RSAR 6-class（当前）
+
+| Setting | seed0 | seed1 | seed2 | mean | std (sample) | 复现记录 |
+|---|---:|---:|---:|---:|---:|---|
+| LoRA r=16 (2k iters) | 0.0253 | 0.0354 | 0.0352 | 0.0320 | 0.0058 | `docs/repro_runs/2025-12-24_6class_scorethr0p05_multiseed_lora_r16_2k.md` |
+| LoRA r=16 target=stages2+3 (10k iters) | 0.0828 | 0.0839 | 0.0871 | 0.0846 | 0.0023 | `docs/repro_runs/2025-12-24_6class_scorethr0p05_multiseed_lora_r16_stage23_10k.md` |
+
+---
+
+## Legacy（ship-only）
+
+### 主结果表
 
 | ID | Setting | mAP(0.5) | 备注 |
 |---:|---|---:|---|
@@ -51,7 +62,7 @@
 | E4-2k | LoRA + SARAug (speckle+gamma, 2k iters) | 0.1845 | `configs/aug_ablation/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r8_saraug_speckle_gamma_2kiter.py` |
 | E5-2k | LoRA + SARAug (log, 2k iters) | 0.1521 | `configs/aug_ablation/retinanet_dinov3_timm_convnext_small_fpn_rsar_le90_lora_r8_saraug_log_2kiter.py` |
 
-## 多 seed 稳定性
+### 多 seed 稳定性
 
 | Setting | seed0 | seed1 | seed2 | mean | std (sample) |
 |---|---:|---:|---:|---:|---:|
