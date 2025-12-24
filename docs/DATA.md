@@ -29,6 +29,8 @@ x1 y1 x2 y2 x3 y3 x4 y4 class difficulty
 
 例如：`train/annfiles/0000501.txt`
 
+> 说明：上述 8 点 polygon 本质上就是 OBB（旋转矩形的 4 个顶点）。MMRotate 训练时会将其转换为内部使用的 5 参数表示 `(xc, yc, w, h, angle)`。
+
 ## 1b) 类别（RSAR 6 类）
 
 本仓库默认按 RSAR 官方 6 类训练/评估（类别名需与标注文本一致，均为小写）：
