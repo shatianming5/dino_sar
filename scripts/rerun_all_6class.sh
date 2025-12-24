@@ -112,7 +112,7 @@ ensure_clean_git
 echo "[1/2] multiseed LoRA r16 2k (6-class) ..."
 bash scripts/run_multiseed_lora_r16_2k_6class.sh "${GPUS}" > "${LOG_DIR}/run_multiseed_lora_r16_2k_6class.log" 2>&1
 
-REPORT1="docs/repro_runs/${RUN_DATE}_6class_${RUN_TAG}_multiseed_lora_r16_2k.md"
+REPORT1="docs/repro_runs/${RUN_DATE}_${RUN_TAG}_multiseed_lora_r16_2k.md"
 write_multiseed_report \
   "${REPORT1}" \
   "复现记录：RSAR 6-class / LoRA r16（2k iters）多 seed（test）" \
@@ -128,7 +128,7 @@ ensure_clean_git
 echo "[2/2] multiseed LoRA r16 stage23 10k (6-class) ..."
 bash scripts/run_multiseed_lora_r16_stage23_10k_6class.sh "${GPUS}" > "${LOG_DIR}/run_multiseed_lora_r16_stage23_10k_6class.log" 2>&1
 
-REPORT2="docs/repro_runs/${RUN_DATE}_6class_${RUN_TAG}_multiseed_lora_r16_stage23_10k.md"
+REPORT2="docs/repro_runs/${RUN_DATE}_${RUN_TAG}_multiseed_lora_r16_stage23_10k.md"
 write_multiseed_report \
   "${REPORT2}" \
   "复现记录：RSAR 6-class / LoRA r16 target=stages2+3（10k iters）多 seed（test）" \
