@@ -25,3 +25,4 @@
 | LoRA r=16 (10k iters, full targets, ClassBalanced t=0.1) | 0.0803 | 0.0821 | 0.0838 | 0.0820 | 0.0017 | `docs/repro_runs/2025-12-25_6class_cb0p1_scorethr0p05_multiseed_lora_r16_cb0p1_10k.md` |
 | LoRA r=16 (ConvNeXt-Base, 10k iters) | 0.0829 | 0.0925 | 0.0923 | 0.0892 | 0.0055 | `docs/repro_runs/2025-12-24_6class_scorethr0p05_multiseed_lora_r16_convnext_base_10k.md` |
 | LoRA r=16 target=stages2+3 (10k iters) | 0.0828 | 0.0839 | 0.0871 | 0.0846 | 0.0023 | `docs/repro_runs/2025-12-24_6class_scorethr0p05_multiseed_lora_r16_stage23_10k.md` |
+| LoRA r=16 target=stages2+3 (10k iters, ClassBalanced t=0.1) | 0.0826 | 0.0849 | 0.0779 | 0.0818 | 0.0035 | `docs/repro_runs/2025-12-25_6class_cb0p1_scorethr0p05_multiseed_lora_r16_stage23_cb0p1_10k.md` |
