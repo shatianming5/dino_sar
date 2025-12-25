@@ -178,4 +178,4 @@ conda run -n dino_sar python tools/jamming/run_curve.py \
 - LoRA r16 stage23+convdown 10k（seed=0/1/2）：`scripts/run_multiseed_lora_r16_stage23_convdown_10k.sh`
 - LoRA r16 stage23+convdown23 10k（seed=0/1/2）：`scripts/run_multiseed_lora_r16_stage23_convdown23_10k.sh`
 
-> 备注：本仓库早期为 ship-only 口径，部分旧脚本会复用历史输出目录；建议优先使用带 `_6class.sh` 后缀的脚本，并通过 `DINO_SAR_RUN_TAG=<tag>` 写入独立输出目录，避免误用旧 checkpoint。
+> 建议优先使用带 `_6class.sh` 后缀的脚本，并通过 `DINO_SAR_RUN_TAG=<tag>` 写入独立输出目录，避免覆盖/复用旧 checkpoint。
