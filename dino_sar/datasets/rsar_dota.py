@@ -192,3 +192,16 @@ class RSARDOTADataset(DOTADataset):
                 pass
 
         return data_infos
+
+    def get_cat_ids(self, idx: int):
+        """Return category ids for image `idx`.
+
+        NOTE: mmdet<3 uses `np.int` in `CustomDataset.get_cat_ids`, which breaks
+        with NumPy>=1.24. We override it here to keep ClassBalancedDataset
+        working in modern NumPy.
+        """
+        ann = self.get_ann_info(idx)
+        labels = ann.get("labels", [])
+        if isinstance(labels, np.ndarray):
+            return labels.astype(np.int64).tolist()
+        return list(labels)
