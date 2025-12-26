@@ -2,11 +2,21 @@
 set -euo pipefail
 
 GPUS="${1:-1}"
+SEED="${2:-0}"
+RUN_TAG="${DINO_SAR_RUN_TAG:-6class_scorethr0p05}"
 
 CONFIG="configs/dinov3_frozen/retinanet_dinov3_timm_convnext_base_fpn_rsar_le90_frozen_2kiter.py"
-WORK_DIR="outputs/dinov3_frozen/retinanet_timm_convnext_base_dinov3_frozen_train_2kiter"
-EVAL_DIR="outputs/eval/dinov3_frozen_convnext_base_val"
+WORK_DIR="outputs/reproduce_${RUN_TAG}/dinov3_frozen_convnext_base_2k/seed${SEED}"
+EVAL_DIR="outputs/eval_${RUN_TAG}/reproduce_dinov3_frozen_convnext_base_2k/seed${SEED}"
 
-bash scripts/train_baseline.sh "${CONFIG}" "${WORK_DIR}" "${GPUS}"
-bash scripts/eval_baseline.sh "${CONFIG}" "${WORK_DIR}/iter_2000.pth" "${GPUS}" "${EVAL_DIR}"
+if [[ -f "${WORK_DIR}/iter_2000.pth" ]]; then
+  echo "[skip train] Found ${WORK_DIR}/iter_2000.pth"
+else
+  bash scripts/train_baseline.sh "${CONFIG}" "${WORK_DIR}" "${GPUS}" "${SEED}"
+fi
 
+if ls "${EVAL_DIR}"/eval_*.json >/dev/null 2>&1; then
+  echo "[skip eval] Found ${EVAL_DIR}/eval_*.json"
+else
+  bash scripts/eval_baseline.sh "${CONFIG}" "${WORK_DIR}/iter_2000.pth" "${GPUS}" "${EVAL_DIR}"
+fi
