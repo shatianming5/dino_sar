@@ -28,3 +28,9 @@
 | LoRA r=16 (ConvNeXt-Base, 10k iters, ClassBalanced t=0.1) | 0.0822 | 0.0744 | 0.1046 | 0.0871 | 0.0157 | `docs/repro_runs/2025-12-25_6class_cb0p1_scorethr0p05_multiseed_lora_r16_convnext_base_cb0p1_10k.md` |
 | LoRA r=16 target=stages2+3 (10k iters) | 0.0828 | 0.0839 | 0.0871 | 0.0846 | 0.0023 | `docs/repro_runs/2025-12-24_6class_scorethr0p05_multiseed_lora_r16_stage23_10k.md` |
 | LoRA r=16 target=stages2+3 (10k iters, ClassBalanced t=0.1) | 0.0826 | 0.0849 | 0.0779 | 0.0818 | 0.0035 | `docs/repro_runs/2025-12-25_6class_cb0p1_scorethr0p05_multiseed_lora_r16_stage23_cb0p1_10k.md` |
+
+## RSAR 6-class（扩展实验：single seed，test）
+
+| Setting | seed | mAP | 复现记录 |
+|---|---:|---:|---|
+| LoRA r=16 (5k iters) | 0 | 0.0697 | `docs/repro_runs/2025-12-25_6class_scorethr0p05_seed0_lora_r16_5k.md` |
