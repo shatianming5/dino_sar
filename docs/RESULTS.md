@@ -19,6 +19,7 @@
 | Setting | seed0 | seed1 | seed2 | mean | std (sample) | 复现记录 |
 |---|---:|---:|---:|---:|---:|---|
 | Baseline R50-FPN (10k iters) | 0.0776 | 0.1095 | 0.1152 | 0.1008 | 0.0203 | `docs/repro_runs/2025-12-24_6class_scorethr0p05_multiseed_baseline_r50_10k.md` |
+| Baseline R50-FPN (100k iters) | 0.2366 | 0.2275 | 0.2247 | 0.2296 | 0.0062 | `docs/repro_runs/2025-12-25_6class_scorethr0p05_multiseed_baseline_r50_100k.md` |
 | Baseline R50-FPN (10k iters, ClassBalanced t=0.1) | 0.0851 | 0.1057 | 0.1160 | 0.1023 | 0.0158 | `docs/repro_runs/2025-12-25_6class_cb0p1_scorethr0p05_multiseed_baseline_r50_cb0p1_10k.md` |
 | LoRA r=16 (2k iters) | 0.0253 | 0.0354 | 0.0352 | 0.0320 | 0.0058 | `docs/repro_runs/2025-12-24_6class_scorethr0p05_multiseed_lora_r16_2k.md` |
 | LoRA r=16 (10k iters, full targets) | 0.0882 | 0.0912 | 0.0850 | 0.0881 | 0.0031 | `docs/repro_runs/2025-12-24_6class_scorethr0p05_multiseed_lora_r16_10k.md` |
