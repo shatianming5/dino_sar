@@ -92,7 +92,7 @@ def main() -> None:
     note = f" {args.note.strip()}" if args.note.strip() else ""
     record_line = (
         f"- Test（测试集）（我已用 tools/test.py 跑完）：dota/mAP={map_v}，AP50={ap50_v}，"
-        f"AP75={ap75_v}（见 {log_ref}）{note}"
+        f"AP75={ap75_v}（见 `{log_ref}`）{note}"
     )
 
     changed = _insert_record(readme_path, args.header, record_line)
@@ -105,4 +105,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

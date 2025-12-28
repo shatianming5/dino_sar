@@ -21,11 +21,11 @@ OUT="$(
 )"
 echo "${OUT}"
 
-CHANGED="$(echo "${OUT}" | sed -n 's/.*changed=\\([^ ]*\\).*/\\1/p')"
-MAP="$(echo "${OUT}" | sed -n 's/.* map=\\([^ ]*\\).*/\\1/p')"
-AP50="$(echo "${OUT}" | sed -n 's/.* ap50=\\([^ ]*\\).*/\\1/p')"
-AP75="$(echo "${OUT}" | sed -n 's/.* ap75=\\([^ ]*\\).*/\\1/p')"
-LOG_REF="$(echo "${OUT}" | sed -n 's/.* log_ref=\\([^ ]*\\).*/\\1/p')"
+CHANGED="$(echo "${OUT}" | sed -n 's/.*changed=\([^ ]*\).*/\1/p')"
+MAP="$(echo "${OUT}" | sed -n 's/.* map=\([^ ]*\).*/\1/p')"
+AP50="$(echo "${OUT}" | sed -n 's/.* ap50=\([^ ]*\).*/\1/p')"
+AP75="$(echo "${OUT}" | sed -n 's/.* ap75=\([^ ]*\).*/\1/p')"
+LOG_REF="$(echo "${OUT}" | sed -n 's/.* log_ref=\([^ ]*\).*/\1/p')"
 
 if [[ "${CHANGED}" != "true" ]]; then
   echo "No README update needed; skipping commit/push."
@@ -34,4 +34,3 @@ fi
 
 MSG="mmrotate1x: record test mAP=${MAP} AP50=${AP50} AP75=${AP75} (${LOG_REF})"
 exec "${SCRIPT_DIR}/git_commit_push.sh" "${MSG}" README.md
-
