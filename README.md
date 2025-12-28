@@ -28,6 +28,9 @@
 - LoRA r=16 (10k, ConvNeXt-Base, mean±std)：0.0892±0.0055（见 `docs/repro_runs/2025-12-24_6class_scorethr0p05_multiseed_lora_r16_convnext_base_10k.md`）
 - LoRA r=16 target=stages2+3 (10k, mean±std)：0.0846±0.0023（见 `docs/repro_runs/2025-12-24_6class_scorethr0p05_multiseed_lora_r16_stage23_10k.md`）
 
+**RSAR（MMRotate1.x / RSAR 主工程）单次训练评估**
+- Test（测试集）（我已用 tools/test.py 跑完）：dota/mAP=0.2645，AP50=0.5580，AP75=0.2220（见 `RSAR/work_dirs/dinov3_lora_r16_bs64_amp/test_epoch12/20251228_114336/20251228_114336.log:738`）
+
 ## 数据说明（不进 Git）
 
 本仓库不提交数据集文件（`train/`、`val/`、`test/` 已在 `.gitignore` 中忽略）。在本机准备好数据后再进行训练/评估。
