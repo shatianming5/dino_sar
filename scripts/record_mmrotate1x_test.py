@@ -29,6 +29,41 @@ def _parse_last_test_metrics(log_path: Path) -> tuple[int, str, str, str]:
     return last
 
 
+_IOU_THR_RE = re.compile(r"iou_thr:\s*(?P<thr>[0-9.]+)")
+
+
+def _parse_iou_thr_class_ap(log_path: Path,
+                            iou_thr: float) -> dict[str, tuple[int, str]]:
+    current_thr = None
+    table: dict[str, tuple[int, str]] = {}
+    with log_path.open("r", encoding="utf-8", errors="replace") as f:
+        for idx, line in enumerate(f, start=1):
+            m = _IOU_THR_RE.search(line)
+            if m:
+                current_thr = float(m.group("thr"))
+                continue
+
+            if current_thr is None or abs(current_thr - iou_thr) > 1e-9:
+                continue
+
+            s = line.strip()
+            if not (s.startswith("|") and s.endswith("|")):
+                continue
+            if s.startswith("| class"):
+                continue
+            if s.startswith("| mAP"):
+                break
+
+            cols = [c.strip() for c in s.split("|")[1:-1]]
+            if len(cols) < 2:
+                continue
+            cls = cols[0]
+            ap = cols[-1]
+            if cls:
+                table[cls] = (idx, ap)
+    return table
+
+
 def _rel_ref(path: Path, base: Path) -> str:
     try:
         return str(path.resolve().relative_to(base.resolve()))
@@ -36,7 +71,8 @@ def _rel_ref(path: Path, base: Path) -> str:
         return str(path.resolve())
 
 
-def _insert_record(readme_path: Path, header: str, record_line: str) -> bool:
+def _upsert_record(readme_path: Path, header: str, record_line: str,
+                   log_ref: str) -> bool:
     lines = readme_path.read_text(encoding="utf-8").splitlines(keepends=True)
     try:
         header_idx = next(i for i, l in enumerate(lines) if header in l)
@@ -45,6 +81,15 @@ def _insert_record(readme_path: Path, header: str, record_line: str) -> bool:
 
     if record_line in "".join(lines):
         return False
+
+    # If this log_ref already exists, update that line in-place to avoid
+    # duplicating records for the same run.
+    log_ref_token = f"`{log_ref}`"
+    for i, line in enumerate(lines):
+        if log_ref_token in line:
+            lines[i] = record_line + "\n"
+            readme_path.write_text("".join(lines), encoding="utf-8")
+            return True
 
     insert_at = header_idx + 1
     lines.insert(insert_at, record_line + "\n")
@@ -78,6 +123,11 @@ def main() -> None:
         default="",
         help="Optional note appended to the record line (e.g. run tag)",
     )
+    parser.add_argument(
+        "--ap75-classes",
+        default="tank,bridge,harbor",
+        help="Comma-separated class names to record AP75 for",
+    )
     args = parser.parse_args()
 
     repo_root = Path(__file__).resolve().parents[1]
@@ -86,16 +136,26 @@ def main() -> None:
     log_path = args.log.expanduser()
     line_no, map_v, ap50_v, ap75_v = _parse_last_test_metrics(log_path)
 
+    ap75_table = _parse_iou_thr_class_ap(log_path, iou_thr=0.75)
+    ap75_classes = [c.strip() for c in args.ap75_classes.split(",") if c.strip()]
+    ap75_parts = []
+    for cls in ap75_classes:
+        if cls not in ap75_table:
+            continue
+        _, ap = ap75_table[cls]
+        ap75_parts.append(f"{cls}={ap}")
+    ap75_cls = f"（AP75分类: {', '.join(ap75_parts)}）" if ap75_parts else ""
+
     rasr_root = repo_root.parent
     log_ref = f"{_rel_ref(log_path, rasr_root)}:{line_no}"
 
     note = f" {args.note.strip()}" if args.note.strip() else ""
     record_line = (
         f"- Test（测试集）（我已用 tools/test.py 跑完）：dota/mAP={map_v}，AP50={ap50_v}，"
-        f"AP75={ap75_v}（见 `{log_ref}`）{note}"
+        f"AP75={ap75_v}{ap75_cls}（见 `{log_ref}`）{note}"
     )
 
-    changed = _insert_record(readme_path, args.header, record_line)
+    changed = _upsert_record(readme_path, args.header, record_line, log_ref)
     now = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
     print(
         f"changed={str(changed).lower()} map={map_v} ap50={ap50_v} ap75={ap75_v} "
