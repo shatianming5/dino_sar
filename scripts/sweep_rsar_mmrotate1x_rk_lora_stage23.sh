@@ -31,6 +31,10 @@ run "${CFG_DIR}/rotated-retinanet-rbox-le90_dinov3-timm-convnext-small_fpn_1x_rs
   "dinov3_rk_lora_dwconv_r16_k1_stage23_bs64_amp" \
   "RKLoRA(k1,stage23,bs64,amp)"
 
+run "${CFG_DIR}/rotated-retinanet-rbox-le90_dinov3-timm-convnext-small_fpn_1x_rsar_rk-lora-dwconv-r16_k4_stage23_bs64_amp_parammatch_lora-r13.py" \
+  "dinov3_rk_lora_dwconv_r16_k4_stage23_bs64_amp_parammatch_lora_r13" \
+  "RKLoRA(k4,stage23,bs64,amp,parammatch,lora-r13)"
+
 run "${CFG_DIR}/rotated-retinanet-rbox-le90_dinov3-timm-convnext-small_fpn_1x_rsar_rk-lora-dwconv-r16_k8_stage23_bs64_amp.py" \
   "dinov3_rk_lora_dwconv_r16_k8_stage23_bs64_amp" \
   "RKLoRA(k8,stage23,bs64,amp)"
@@ -47,4 +51,3 @@ run "${CFG_DIR}/rotated-retinanet-rbox-le90_dinov3-timm-convnext-small_fpn_1x_rs
 run "${CFG_DIR}/rotated-retinanet-rbox-le90_dinov3-timm-convnext-small_fpn_1x_rsar_rk-lora-dwconv-r16_k4_stage23_bs64_amp_lora-head.py" \
   "dinov3_rk_lora_dwconv_r16_k4_stage23_bs64_amp_lora_head" \
   "RKLoRA(k4,stage23)+LoRA(head),bs64,amp"
-
