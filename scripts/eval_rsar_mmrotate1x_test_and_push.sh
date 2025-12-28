@@ -19,12 +19,15 @@ CKPT="$2"
 shift 2 || true
 NOTE="${*:-}"
 
+CFG="$(realpath "${CFG}")"
+CKPT="$(realpath "${CKPT}")"
+
 STAMP="$(date -u '+%Y%m%d_%H%M%S')"
 WORKDIR="${RSAR_ROOT}/work_dirs/auto_test_${STAMP}"
 
 export PYTHONPATH="${RSAR_ROOT}:${PYTHONPATH:-}"
 
-python3 "${RSAR_ROOT}/tools/test.py" "${CFG}" "${CKPT}" --work-dir "${WORKDIR}"
+(cd "${RSAR_ROOT}" && python3 tools/test.py "${CFG}" "${CKPT}" --work-dir "${WORKDIR}")
 
 LOG="$(find "${WORKDIR}" -maxdepth 3 -type f -name '*.log' | sort | tail -n 1)"
 if [[ -z "${LOG}" ]]; then
@@ -33,4 +36,3 @@ if [[ -z "${LOG}" ]]; then
 fi
 
 exec "${SCRIPT_DIR}/record_mmrotate1x_test_and_push.sh" "${LOG}" ${NOTE:+${NOTE}}
-
