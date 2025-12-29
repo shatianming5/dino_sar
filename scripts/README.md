@@ -9,6 +9,7 @@
 - 一键评估 + 记录 + push：`./scripts/eval_rsar_mmrotate1x_test_and_push.sh <RSAR_config.py> <checkpoint.pth> [note...]`
 - 训练 + 评估 + 记录 + push：`./scripts/train_eval_rsar_mmrotate1x_and_push.sh <RSAR_config.py> <work_dir_name> [note...]`
 - RK-LoRA(stage2+3) 消融扫参（顺序执行）：`WAIT_FOR_TMUX_SESSION=<tmux_session> ./scripts/sweep_rsar_mmrotate1x_rk_lora_stage23.sh`
+- RK-LoRA(stage2+3) 额外消融（neck+head）：`WAIT_FOR_TMUX_SESSION=<tmux_session> ./scripts/sweep_rsar_mmrotate1x_rk_lora_stage23_extras.sh`
 - A-LoRA 消融扫参（顺序执行）：`WAIT_FOR_TMUX_SESSION=<tmux_session> ./scripts/sweep_rsar_mmrotate1x_a_lora.sh`
 
 Notes:
