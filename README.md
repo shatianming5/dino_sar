@@ -34,6 +34,8 @@
 - Test（测试集）（我已用 tools/test.py 跑完）：dota/mAP=0.2586，AP50=0.5430，AP75=0.2060（AP75分类: tank=0.080, bridge=0.060, harbor=0.107）（见 `RSAR/work_dirs/auto_test_20251228_190838/20251228_190841/20251228_190841.log:758`） RKLoRA(k4,stage23,bs64,amp,ckpt)
 - Test（测试集）（我已用 tools/test.py 跑完）：dota/mAP=0.2645，AP50=0.5580，AP75=0.2220（AP75分类: tank=0.132, bridge=0.093, harbor=0.103）（见 `RSAR/work_dirs/dinov3_lora_r16_bs64_amp/test_epoch12/20251228_114336/20251228_114336.log:738`）
 
+**SARDet-100K（MSFA / mmdet）单次训练评估**
+
 ## 数据说明（不进 Git）
 
 本仓库不提交数据集文件（`train/`、`val/`、`test/` 已在 `.gitignore` 中忽略）。在本机准备好数据后再进行训练/评估。
