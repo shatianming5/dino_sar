@@ -29,6 +29,7 @@
 - LoRA r=16 target=stages2+3 (10k, mean±std)：0.0846±0.0023（见 `docs/repro_runs/2025-12-24_6class_scorethr0p05_multiseed_lora_r16_stage23_10k.md`）
 
 **RSAR（MMRotate1.x / RSAR 主工程）单次训练评估**
+- Test（测试集）（我已用 tools/test.py 跑完）：dota/mAP=0.1625，AP50=0.3720，AP75=0.1120（AP75分类: tank=0.091, bridge=0.019, harbor=0.000）（见 `RSAR/work_dirs/auto_test_20251229_170553/20251229_170557/20251229_170557.log:777`） RKLoRA(k4,stage23)+LoRA(neck+head),bs64,amp
 - Test（测试集）（我已用 tools/test.py 跑完）：dota/mAP=0.2556，AP50=0.5340，AP75=0.2080（AP75分类: tank=0.105, bridge=0.108, harbor=0.111）（见 `RSAR/work_dirs/auto_test_20251229_103230/20251229_103233/20251229_103233.log:784`） RotAug+LoRA(r16),bs64,amp
 - Test（测试集）（我已用 tools/test.py 跑完）：dota/mAP=0.2604，AP50=0.5460，AP75=0.2170（AP75分类: tank=0.131, bridge=0.111, harbor=0.121）（见 `RSAR/work_dirs/auto_test_20251229_070031/20251229_070034/20251229_070034.log:758`） RKLoRA(k4,stage23,bs64,amp,parammatch,lora-r13)
 - Test（测试集）（我已用 tools/test.py 跑完）：dota/mAP=0.2603，AP50=0.5440，AP75=0.2200（AP75分类: tank=0.125, bridge=0.111, harbor=0.146）（见 `RSAR/work_dirs/auto_test_20251229_000604/20251229_000607/20251229_000607.log:758`） RKLoRA(k1,stage23,bs64,amp)
