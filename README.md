@@ -37,6 +37,7 @@
 - Test（测试集）（我已用 tools/test.py 跑完）：dota/mAP=0.2645，AP50=0.5580，AP75=0.2220（AP75分类: tank=0.132, bridge=0.093, harbor=0.103）（见 `RSAR/work_dirs/dinov3_lora_r16_bs64_amp/test_epoch12/20251228_114336/20251228_114336.log:738`）
 
 **SARDet-100K（MSFA / mmdet）单次训练评估**
+- Test（测试集）（我已用 tools/test.py 跑完）：coco/bbox_mAP=0.341，AP50=0.658，AP75=0.318（AP75分类: tank=0.243, bridge=0.068, harbor=0.151）（见 `SARDet_100K/MSFA/work_dirs/sardet_dinov3_lora_r16_bs64_amp/test_epoch12/20251230_003220/20251230_003220.log:491`） SARDet-100K: DINOv3-ConvNeXtS + LoRA(r16),bs64,amp (test retry2)
 
 ## 数据说明（不进 Git）
 
