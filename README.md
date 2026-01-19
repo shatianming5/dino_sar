@@ -39,7 +39,7 @@ export SARDET100K_ROOT=/path/to/SARDet_100K
 This repo does not vendor large checkpoints.
 
 - DINOv3 (ConvNeXt) backbones are pulled automatically by `timm` when `pretrained=True` (internet required).
-- Our trained SARDet-100K checkpoints (once published): see Releases below.
+- Our trained SARDet-100K checkpoints: TBD.
 
 ## Reproducibility
 
@@ -49,12 +49,6 @@ This repo does not vendor large checkpoints.
 - Experiment ledger + aggregated tables:
   - `artifacts/experiments/experiment.md`
   - `artifacts/experiments/experiment_results.tsv`
-
-## Releases (Artifacts)
-
-Large runtime artifacts (checkpoints / logs / visualizations) are published via GitHub Releases:
-
-- https://github.com/shatianming5/dino_sar/releases
 
 ## Citation
 
