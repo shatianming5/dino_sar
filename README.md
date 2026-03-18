@@ -11,6 +11,7 @@ This repo includes runnable configs/scripts, plus an experiment ledger and resul
 - Conventions (naming / env vars): `docs/CONVENTIONS.md`
 - Artifacts & Releases (what goes in git vs Release): `docs/ARTIFACTS_AND_RELEASES.md`
 - Release checklist (what’s still missing): `docs/RELEASE_CHECKLIST.md`
+- FAQ (including "What model is this?" / 你是什么模型): `docs/FAQ.md`
 
 ## Dataset
 
